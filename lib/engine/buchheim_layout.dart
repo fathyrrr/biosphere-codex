@@ -12,10 +12,10 @@ class BuchheimLayoutEngine {
   final double topMargin;    // Margin atas canvas
 
   BuchheimLayoutEngine({
-    this.levelSpacing = 160.0,
-    this.nodeSpacing = 52.0,
+    this.levelSpacing = 190.0,
+    this.nodeSpacing = 64.0,
     this.leftMargin = 80.0,
-    this.topMargin = 60.0,
+    this.topMargin = 80.0,
   });
 
   /// Menghitung koordinat (x, y) untuk seluruh node yang terlihat,

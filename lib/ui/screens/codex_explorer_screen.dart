@@ -6,6 +6,7 @@ import '../../models/taxon_node.dart';
 import '../phylogeny_canvas.dart';
 import '../widgets/lca_calculator_dialog.dart';
 import '../widgets/lineage_breadcrumb.dart';
+import '../widgets/rank_legend_panel.dart';
 import '../widgets/search_sheet.dart';
 import '../widgets/taxon_detail_sheet.dart';
 
@@ -419,6 +420,19 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
           ),
         ),
 
+        // Legend panel — kiri bawah
+        Positioned(
+          left: 12,
+          bottom: _selectedNode != null ? 92 : 12,
+          child: RankLegendPanel(
+            totalNodes: _treeEngine.totalNodesCount,
+            extinctCount: _treeEngine.extinctCount,
+            onResetView: () => _canvasKey.currentState?.resetView(),
+            onExpandAll: () => setState(() => _treeEngine.expandToDepth(20)),
+            onCollapseAll: () => setState(() => _treeEngine.expandToDepth(2)),
+          ),
+        ),
+
         // Bottom Quick Info Card
         if (_selectedNode != null)
           Positioned(
@@ -455,6 +469,7 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
                   onToggleExpand: _onToggleExpand,
                 ),
               ),
+              // Breadcrumb di atas
               Positioned(
                 top: 0,
                 left: 0,
@@ -465,6 +480,18 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
                     _onNodeSelected(node);
                     _canvasKey.currentState?.focusOnNode(node);
                   },
+                ),
+              ),
+              // Legend panel kiri bawah
+              Positioned(
+                left: 14,
+                bottom: 14,
+                child: RankLegendPanel(
+                  totalNodes: _treeEngine.totalNodesCount,
+                  extinctCount: _treeEngine.extinctCount,
+                  onResetView: () => _canvasKey.currentState?.resetView(),
+                  onExpandAll: () => setState(() => _treeEngine.expandToDepth(20)),
+                  onCollapseAll: () => setState(() => _treeEngine.expandToDepth(2)),
                 ),
               ),
             ],
