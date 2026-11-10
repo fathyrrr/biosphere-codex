@@ -662,11 +662,11 @@ class _HeroScreenState extends State<HeroScreen>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.play_arrow_rounded,
-                      color: Color(0xFF022C22), size: 22),
+                  const Icon(Icons.account_tree_rounded,
+                      color: Color(0xFF022C22), size: 20),
                   const SizedBox(width: 10),
                   Text(
-                    'Mulai Menjelajah →',
+                    'Jelajahi Pohon Kehidupan →',
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

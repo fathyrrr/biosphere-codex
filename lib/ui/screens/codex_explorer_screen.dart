@@ -3,15 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../database/taxonomy_repository.dart';
 import '../../engine/n_ary_tree.dart';
 import '../../models/taxon_node.dart';
-import '../phylogeny_canvas.dart';
-import '../widgets/lca_calculator_dialog.dart';
+import '../widgets/clean_tree_view.dart';
+import '../widgets/clade_deck_view.dart';
 import '../widgets/lineage_breadcrumb.dart';
-import '../widgets/rank_legend_panel.dart';
 import '../widgets/search_sheet.dart';
+import '../widgets/lca_calculator_dialog.dart';
 import '../widgets/taxon_detail_sheet.dart';
 
-/// Layar utama Codex Explorer — antarmuka interaktif pohon filogenetik.
-/// Responsif: Side panel pada layar lebar (≥900px), bottom sheet pada mobile.
+enum ExplorerViewMode { tree, deck }
+
+/// Layar Utama Biosphere Codex Explorer yang dirombak total:
+/// Bersih, berstruktur rapi, cepat, responsif, dan menyajikan hierarki
+/// taksonomi biologi tanpa membuat pengguna kewalahan atau freeze.
 class CodexExplorerScreen extends StatefulWidget {
   final VoidCallback? onBackToHero;
 
@@ -21,52 +24,35 @@ class CodexExplorerScreen extends StatefulWidget {
   State<CodexExplorerScreen> createState() => _CodexExplorerScreenState();
 }
 
-class _CodexExplorerScreenState extends State<CodexExplorerScreen>
-    with TickerProviderStateMixin {
-  final GlobalKey<PhylogenyCanvasState> _canvasKey =
-      GlobalKey<PhylogenyCanvasState>();
+class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
   final NAryTreeEngine _treeEngine = NAryTreeEngine();
 
   bool _isLoading = true;
   String _loadingMessage = 'Memuat basis data taksonomi...';
   TaxonNode? _selectedNode;
   final Set<int> _highlightedNodeIds = {};
-
-  late AnimationController _loadingController;
-  late Animation<double> _loadingOpacity;
+  ExplorerViewMode _viewMode = ExplorerViewMode.tree;
 
   @override
   void initState() {
     super.initState();
-    _loadingController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 400),
-    );
-    _loadingOpacity = CurvedAnimation(
-      parent: _loadingController,
-      curve: Curves.easeOut,
-    );
-    _loadingController.forward();
     _bootstrap();
-  }
-
-  @override
-  void dispose() {
-    _loadingController.dispose();
-    super.dispose();
   }
 
   Future<void> _bootstrap() async {
     try {
-      setState(() => _loadingMessage = 'Menginisialisasi basis data taksonomi...');
+      setState(() => _loadingMessage = 'Menginisialisasi basis data...');
       await TaxonomyRepository.instance.init();
 
-      setState(() => _loadingMessage = 'Membangun struktur pohon N-ary...');
+      setState(() => _loadingMessage = 'Membangun hierarki pohon kehidupan...');
       final nodes = await TaxonomyRepository.instance.getAllTaxaNodes();
 
       _treeEngine.buildFromNodes(nodes);
-      _treeEngine.expandToDepth(3);
 
+      // Buka level awal (Domain & Kingdom) agar pengguna langsung melihat percabangan awal
+      _treeEngine.expandToDepth(2);
+
+      // Default fokus ke Homo sapiens sebagai permulaan familiar
       final human = _treeEngine.getNodeById(172);
       if (human != null) {
         _selectedNode = human;
@@ -76,10 +62,9 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
         _selectedNode = _treeEngine.root;
       }
 
-      await _loadingController.reverse();
       setState(() => _isLoading = false);
     } catch (e) {
-      debugPrint('[BiosphereCodex] Error bootstrap: $e');
+      debugPrint('[CodexExplorer] Bootstrap error: $e');
       setState(() => _isLoading = false);
     }
   }
@@ -89,22 +74,23 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
       _selectedNode = node;
       _highlightedNodeIds.clear();
       _highlightedNodeIds.addAll(node.lineage.map((e) => e.id));
+      _treeEngine.expandTo(node);
     });
 
-    final isWide = MediaQuery.of(context).size.width >= 900;
-    if (!isWide) {
+    // Pada layar ponsel (narrow), tampilkan bottom sheet detail
+    final isWide = MediaQuery.of(context).size.width >= 960;
+    if (!isWide && _viewMode == ExplorerViewMode.tree) {
       _showDetailSheet(node);
     }
   }
 
   void _onToggleExpand(TaxonNode node) {
-    setState(() => node.toggleExpanded());
+    setState(() {
+      node.toggleExpanded();
+    });
   }
 
   void _showDetailSheet(TaxonNode node) {
-    final isWide = MediaQuery.of(context).size.width >= 900;
-    if (isWide) return; // Wide layout: detail tampil di side panel
-
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -114,11 +100,9 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
         onNodeSelected: (newNode) {
           Navigator.pop(ctx);
           _onNodeSelected(newNode);
-          _canvasKey.currentState?.focusOnNode(newNode);
         },
         onFocusCamera: () {
           Navigator.pop(ctx);
-          _canvasKey.currentState?.focusOnNode(node);
         },
         onToggleExpand: () {
           _onToggleExpand(node);
@@ -141,7 +125,6 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
         treeEngine: _treeEngine,
         onSelectTaxon: (node) {
           _onNodeSelected(node);
-          _canvasKey.currentState?.focusOnNode(node);
         },
       ),
     );
@@ -163,14 +146,18 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
               _highlightedNodeIds.add(n.id);
             }
             _selectedNode = divergence.lca;
+            _treeEngine.expandTo(divergence.nodeA);
+            _treeEngine.expandTo(divergence.nodeB);
           });
-          _canvasKey.currentState?.focusOnNode(divergence.lca);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: const Color(0xFF1E293B),
+              backgroundColor: const Color(0xFF0F2E23),
               content: Text(
-                'LCA: ${divergence.lca.scientificName} (${divergence.totalTaxonomicDistance} langkah)',
-                style: const TextStyle(color: Color(0xFF34D399)),
+                'LCA Ditemukan: ${divergence.lca.scientificName} (${divergence.totalTaxonomicDistance} langkah divergensi)',
+                style: const TextStyle(
+                  color: Color(0xFF34D399),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
@@ -186,187 +173,154 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return _buildLoadingScreen();
+      return _buildLoading();
     }
 
-    final size = MediaQuery.of(context).size;
-    final isWide = size.width >= 900;
+    final isWide = MediaQuery.of(context).size.width >= 960;
 
     return Scaffold(
       backgroundColor: const Color(0xFF090D16),
-      appBar: _buildAppBar(isWide),
-      body: isWide
-          ? _buildWideLayout()
-          : _buildNarrowLayout(),
-    );
-  }
+      appBar: _buildAppBar(),
+      body: Column(
+        children: [
+          // 1. Breadcrumb Silsilah Interaktif
+          LineageBreadcrumb(
+            selectedNode: _selectedNode,
+            onNodeSelected: _onNodeSelected,
+          ),
 
-  // ─────────────────────────────────────────────────────
-  // LOADING SCREEN
-  // ─────────────────────────────────────────────────────
-  Widget _buildLoadingScreen() {
-    return Scaffold(
-      backgroundColor: const Color(0xFF090D16),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TweenAnimationBuilder<double>(
-              tween: Tween(begin: 0.0, end: 1.0),
-              duration: const Duration(milliseconds: 600),
-              curve: Curves.elasticOut,
-              builder: (_, v, child) =>
-                  Transform.scale(scale: v, child: child),
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: const Color(0xFF10B981).withOpacity(0.1),
-                  border: Border.all(
-                      color: const Color(0xFF10B981).withOpacity(0.4)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF10B981).withOpacity(0.2),
-                      blurRadius: 30,
-                    ),
-                  ],
-                ),
-                child: const Icon(Icons.account_tree_rounded,
-                    size: 48, color: Color(0xFF10B981)),
-              ),
-            ),
-            const SizedBox(height: 28),
-            Text(
-              'BIOSPHERE CODEX',
-              style: GoogleFonts.spaceMono(
-                letterSpacing: 3.5,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xFFF1F5F9),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              _loadingMessage,
-              style: GoogleFonts.inter(
-                  color: const Color(0xFF64748B), fontSize: 12),
-            ),
-            const SizedBox(height: 28),
-            const SizedBox(
-              width: 160,
-              child: LinearProgressIndicator(
-                backgroundColor: Color(0xFF1E293B),
-                color: Color(0xFF10B981),
-                minHeight: 2,
-              ),
-            ),
-          ],
-        ),
+          // 2. Area Konten Utama (Responsive Dual-View)
+          Expanded(
+            child: isWide ? _buildWideLayout() : _buildNarrowLayout(),
+          ),
+        ],
       ),
     );
   }
 
-  // ─────────────────────────────────────────────────────
-  // APP BAR
-  // ─────────────────────────────────────────────────────
-  PreferredSizeWidget _buildAppBar(bool isWide) {
+  PreferredSizeWidget _buildAppBar() {
     return AppBar(
       backgroundColor: const Color(0xFF0A0F1E),
       elevation: 0,
-      toolbarHeight: 60,
-      titleSpacing: 0,
       leading: widget.onBackToHero != null
           ? IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                  color: Color(0xFF64748B), size: 18),
+                  color: Color(0xFF94A3B8), size: 18),
               tooltip: 'Kembali ke Beranda',
               onPressed: widget.onBackToHero,
             )
           : null,
-      title: Padding(
-        padding: EdgeInsets.only(left: widget.onBackToHero != null ? 0 : 16),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(7),
-              decoration: BoxDecoration(
-                color: const Color(0xFF10B981).withOpacity(0.12),
-                borderRadius: BorderRadius.circular(9),
-                border: Border.all(
-                    color: const Color(0xFF10B981).withOpacity(0.3)),
+      title: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(7),
+            decoration: BoxDecoration(
+              color: const Color(0xFF10B981).withOpacity(0.12),
+              borderRadius: BorderRadius.circular(8),
+              border:
+                  Border.all(color: const Color(0xFF10B981).withOpacity(0.4)),
+            ),
+            child: const Icon(Icons.account_tree_outlined,
+                color: Color(0xFF10B981), size: 18),
+          ),
+          const SizedBox(width: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'BIOSPHERE CODEX',
+                style: GoogleFonts.spaceMono(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                  color: const Color(0xFFF8FAFC),
+                ),
               ),
-              child: const Icon(Icons.account_tree_outlined,
-                  color: Color(0xFF10B981), size: 16),
-            ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'BIOSPHERE CODEX',
-                  style: GoogleFonts.spaceMono(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.0,
-                    color: const Color(0xFFF8FAFC),
-                  ),
+              Text(
+                '${_treeEngine.totalNodesCount} taksa · ${_treeEngine.extinctCount} punah (†)',
+                style: GoogleFonts.inter(
+                  fontSize: 10.5,
+                  color: const Color(0xFF64748B),
                 ),
-                Text(
-                  '${_treeEngine.totalNodesCount} taksa · ${_treeEngine.extinctCount} punah (†)',
-                  style: GoogleFonts.inter(
-                      fontSize: 10, color: const Color(0xFF475569)),
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
       actions: [
-        // Search
-        _AppBarAction(
-          icon: Icons.search_rounded,
-          color: const Color(0xFF38BDF8),
-          tooltip: 'Cari Taksa (FTS)',
-          onTap: _openSearch,
+        // Mode Switcher: Pohon vs Katalog Deck
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+          padding: const EdgeInsets.all(3),
+          decoration: BoxDecoration(
+            color: const Color(0xFF1E293B),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _ModeButton(
+                icon: Icons.account_tree_rounded,
+                label: 'Pohon',
+                isActive: _viewMode == ExplorerViewMode.tree,
+                onTap: () => setState(() => _viewMode = ExplorerViewMode.tree),
+              ),
+              _ModeButton(
+                icon: Icons.grid_view_rounded,
+                label: 'Katalog',
+                isActive: _viewMode == ExplorerViewMode.deck,
+                onTap: () => setState(() => _viewMode = ExplorerViewMode.deck),
+              ),
+            ],
+          ),
         ),
-        // LCA
-        _AppBarAction(
-          icon: Icons.hub_outlined,
-          color: const Color(0xFF10B981),
-          tooltip: 'Kalkulator LCA',
-          onTap: () => _openLCADialog(_selectedNode),
+
+        // Pencarian (FTS)
+        IconButton(
+          icon: const Icon(Icons.search_rounded, color: Color(0xFF38BDF8)),
+          tooltip: 'Pencarian Taksa (FTS)',
+          onPressed: _openSearch,
         ),
-        // More
+
+        // Kalkulator Divergensi LCA
+        IconButton(
+          icon: const Icon(Icons.hub_outlined, color: Color(0xFF10B981)),
+          tooltip: 'Kalkulator Kekerabatan LCA',
+          onPressed: () => _openLCADialog(_selectedNode),
+        ),
+
+        // Menu Aksi Tambahan
         PopupMenuButton<String>(
-          icon:
-              const Icon(Icons.more_vert, color: Color(0xFF64748B), size: 20),
+          icon: const Icon(Icons.more_vert, color: Color(0xFF94A3B8)),
           color: const Color(0xFF1E293B),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           onSelected: (val) {
-            if (val == 'reset') {
-              _canvasKey.currentState?.resetView();
-            } else if (val == 'expand_all') {
+            if (val == 'expand_all') {
               setState(() => _treeEngine.expandToDepth(20));
-            } else if (val == 'collapse') {
+            } else if (val == 'collapse_all') {
               setState(() => _treeEngine.expandToDepth(2));
+            } else if (val == 'focus_human') {
+              final human = _treeEngine.getNodeById(172);
+              if (human != null) _onNodeSelected(human);
             }
           },
           itemBuilder: (context) => [
-            _menuItem('reset', Icons.center_focus_strong,
-                'Reset Sudut Pandang', const Color(0xFF38BDF8)),
             _menuItem('expand_all', Icons.unfold_more, 'Buka Semua Cabang',
                 const Color(0xFF10B981)),
-            _menuItem('collapse', Icons.unfold_less, 'Ringkas ke Kingdom',
+            _menuItem('collapse_all', Icons.unfold_less, 'Ringkas ke Domain',
                 const Color(0xFFFBBF24)),
+            _menuItem('focus_human', Icons.person_outline,
+                'Fokus ke Homo sapiens', const Color(0xFF38BDF8)),
           ],
         ),
-        const SizedBox(width: 4),
+        const SizedBox(width: 6),
       ],
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
         child: Container(
           height: 1,
-          color: const Color(0xFF1E293B).withOpacity(0.6),
+          color: const Color(0xFF1E293B),
         ),
       ),
     );
@@ -381,281 +335,161 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen>
           Icon(icon, size: 16, color: color),
           const SizedBox(width: 10),
           Text(label,
-              style: GoogleFonts.inter(
-                  color: Colors.white, fontSize: 13)),
+              style: GoogleFonts.inter(color: Colors.white, fontSize: 13)),
         ],
       ),
     );
   }
 
   // ─────────────────────────────────────────────────────
-  // NARROW LAYOUT (Mobile/Tablet)
+  // TAMPILAN MOBILE / TABLET (<960px)
   // ─────────────────────────────────────────────────────
   Widget _buildNarrowLayout() {
-    return Stack(
-      children: [
-        // Canvas
-        Positioned.fill(
-          child: PhylogenyCanvas(
-            key: _canvasKey,
-            treeEngine: _treeEngine,
+    return _viewMode == ExplorerViewMode.tree
+        ? CleanTreeView(
+            rootNode: _treeEngine.root,
             selectedNode: _selectedNode,
             highlightedNodeIds: _highlightedNodeIds,
             onNodeSelected: _onNodeSelected,
             onToggleExpand: _onToggleExpand,
-          ),
-        ),
-
-        // Breadcrumb
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: LineageBreadcrumb(
-            selectedNode: _selectedNode,
-            onNodeSelected: (node) {
-              _onNodeSelected(node);
-              _canvasKey.currentState?.focusOnNode(node);
-            },
-          ),
-        ),
-
-        // Legend panel — kiri bawah
-        Positioned(
-          left: 12,
-          bottom: _selectedNode != null ? 92 : 12,
-          child: RankLegendPanel(
-            totalNodes: _treeEngine.totalNodesCount,
-            extinctCount: _treeEngine.extinctCount,
-            onResetView: () => _canvasKey.currentState?.resetView(),
-            onExpandAll: () => setState(() => _treeEngine.expandToDepth(20)),
-            onCollapseAll: () => setState(() => _treeEngine.expandToDepth(2)),
-          ),
-        ),
-
-        // Bottom Quick Info Card
-        if (_selectedNode != null)
-          Positioned(
-            left: 12,
-            right: 12,
-            bottom: 12,
-            child: _QuickInfoCard(
-              node: _selectedNode!,
-              onTap: () => _showDetailSheet(_selectedNode!),
-            ),
-          ),
-      ],
-    );
+          )
+        : (_selectedNode != null
+            ? CladeDeckView(
+                node: _selectedNode!,
+                onNodeSelected: _onNodeSelected,
+                onOpenLCA: () => _openLCADialog(_selectedNode),
+              )
+            : const Center(
+                child: Text('Pilih takson untuk memulai katalog.')));
   }
 
   // ─────────────────────────────────────────────────────
-  // WIDE LAYOUT (Desktop/Large tablet)
+  // TAMPILAN DESKTOP / MONITOR LEBAR (≥960px)
   // ─────────────────────────────────────────────────────
   Widget _buildWideLayout() {
     return Row(
       children: [
-        // Left: Phylogeny Canvas
+        // Kolom Kiri: Pohon Silsilah / Katalog Utama
         Expanded(
-          flex: 3,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: PhylogenyCanvas(
-                  key: _canvasKey,
-                  treeEngine: _treeEngine,
+          flex: 6,
+          child: _viewMode == ExplorerViewMode.tree
+              ? CleanTreeView(
+                  rootNode: _treeEngine.root,
                   selectedNode: _selectedNode,
                   highlightedNodeIds: _highlightedNodeIds,
                   onNodeSelected: _onNodeSelected,
                   onToggleExpand: _onToggleExpand,
-                ),
-              ),
-              // Breadcrumb di atas
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: LineageBreadcrumb(
-                  selectedNode: _selectedNode,
-                  onNodeSelected: (node) {
-                    _onNodeSelected(node);
-                    _canvasKey.currentState?.focusOnNode(node);
-                  },
-                ),
-              ),
-              // Legend panel kiri bawah
-              Positioned(
-                left: 14,
-                bottom: 14,
-                child: RankLegendPanel(
-                  totalNodes: _treeEngine.totalNodesCount,
-                  extinctCount: _treeEngine.extinctCount,
-                  onResetView: () => _canvasKey.currentState?.resetView(),
-                  onExpandAll: () => setState(() => _treeEngine.expandToDepth(20)),
-                  onCollapseAll: () => setState(() => _treeEngine.expandToDepth(2)),
-                ),
-              ),
-            ],
-          ),
+                )
+              : (_selectedNode != null
+                  ? CladeDeckView(
+                      node: _selectedNode!,
+                      onNodeSelected: _onNodeSelected,
+                      onOpenLCA: () => _openLCADialog(_selectedNode),
+                    )
+                  : const Center(
+                      child: Text('Pilih takson untuk memulai katalog.'))),
         ),
 
-        // Right: Side Detail Panel
-        Container(
-          width: 320,
-          decoration: const BoxDecoration(
-            color: Color(0xFF0A0F1E),
-            border: Border(
-              left: BorderSide(color: Color(0xFF1E293B)),
-            ),
+        // Garis Pembatas
+        Container(width: 1, color: const Color(0xFF1E293B)),
+
+        // Kolom Kanan: Panel Inspektur Detail Terintegrasi
+        Expanded(
+          flex: 4,
+          child: Container(
+            color: const Color(0xFF0A0F1E),
+            child: _selectedNode != null
+                ? CladeDeckView(
+                    node: _selectedNode!,
+                    onNodeSelected: _onNodeSelected,
+                    onOpenLCA: () => _openLCADialog(_selectedNode),
+                  )
+                : _buildEmptyInspector(),
           ),
-          child: _selectedNode != null
-              ? _SidePanelDetail(
-                  node: _selectedNode!,
-                  treeEngine: _treeEngine,
-                  onNodeSelected: (node) {
-                    setState(() {
-                      _selectedNode = node;
-                      _highlightedNodeIds.clear();
-                      _highlightedNodeIds
-                          .addAll(node.lineage.map((e) => e.id));
-                    });
-                    _canvasKey.currentState?.focusOnNode(node);
-                  },
-                  onFocusCamera: () {
-                    _canvasKey.currentState?.focusOnNode(_selectedNode!);
-                  },
-                  onToggleExpand: () {
-                    _onToggleExpand(_selectedNode!);
-                  },
-                  onOpenLCA: () => _openLCADialog(_selectedNode),
-                )
-              : _buildEmptyPanel(),
         ),
       ],
     );
   }
 
-  Widget _buildEmptyPanel() {
+  Widget _buildEmptyInspector() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.touch_app_outlined,
-              color: Color(0xFF334155), size: 40),
-          const SizedBox(height: 14),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: const Color(0xFF1E293B).withOpacity(0.5),
+            ),
+            child: const Icon(Icons.touch_app_outlined,
+                color: Color(0xFF64748B), size: 36),
+          ),
+          const SizedBox(height: 16),
           Text(
-            'Pilih Takson',
+            'Pilih Takson dari Pohon',
             style: GoogleFonts.inter(
-              color: const Color(0xFF475569),
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFFCBD5E1),
             ),
           ),
           const SizedBox(height: 6),
           Text(
-            'Klik node pada pohon\nuntuk melihat detail',
+            'Klik cabang pada pohon silsilah untuk\nmemeriksa garis keturunan dan faktanya.',
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-              color: const Color(0xFF334155),
-              fontSize: 12,
+              fontSize: 12.5,
+              color: const Color(0xFF64748B),
             ),
           ),
         ],
       ),
     );
   }
-}
 
-// ════════════════════════════════════════════════════════
-// QUICK INFO CARD (mobile bottom floating)
-// ════════════════════════════════════════════════════════
-class _QuickInfoCard extends StatelessWidget {
-  final TaxonNode node;
-  final VoidCallback onTap;
-
-  const _QuickInfoCard({required this.node, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: const Color(0xFF0A0F1E).withOpacity(0.97),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFF1E293B)),
-          boxShadow: const [
-            BoxShadow(
-                color: Colors.black54, blurRadius: 16, offset: Offset(0, 4)),
-          ],
-        ),
-        child: Row(
+  Widget _buildLoading() {
+    return Scaffold(
+      backgroundColor: const Color(0xFF090D16),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 36,
-              height: 36,
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: (node.isExtinct ? Colors.redAccent : node.rank.color)
-                    .withOpacity(0.15),
                 shape: BoxShape.circle,
+                color: const Color(0xFF10B981).withOpacity(0.1),
                 border: Border.all(
-                  color: (node.isExtinct ? Colors.redAccent : node.rank.color)
-                      .withOpacity(0.4),
-                ),
+                    color: const Color(0xFF10B981).withOpacity(0.4)),
               ),
-              child: Center(
-                child: Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: node.isExtinct ? Colors.redAccent : node.rank.color,
-                    shape: BoxShape.circle,
-                  ),
-                ),
+              child: const Icon(Icons.account_tree_rounded,
+                  size: 44, color: Color(0xFF10B981)),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'BIOSPHERE CODEX',
+              style: GoogleFonts.spaceMono(
+                letterSpacing: 3.0,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFFF1F5F9),
               ),
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    node.isExtinct
-                        ? '† ${node.scientificName}'
-                        : node.scientificName,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      fontStyle: (node.rank.displayName == 'Species' ||
-                              node.rank.displayName == 'Genus')
-                          ? FontStyle.italic
-                          : FontStyle.normal,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    '${node.rank.displayName}  ·  ${node.commonName ?? "Ketuk untuk detail"}',
-                    style: const TextStyle(
-                        color: Color(0xFF64748B), fontSize: 11.5),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
+            const SizedBox(height: 8),
+            Text(
+              _loadingMessage,
+              style: GoogleFonts.inter(
+                  color: const Color(0xFF64748B), fontSize: 12),
             ),
-            const SizedBox(width: 10),
-            Container(
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1E293B),
-                borderRadius: BorderRadius.circular(8),
+            const SizedBox(height: 24),
+            const SizedBox(
+              width: 140,
+              child: LinearProgressIndicator(
+                backgroundColor: Color(0xFF1E293B),
+                color: Color(0xFF10B981),
+                minHeight: 2.5,
               ),
-              child: const Icon(Icons.keyboard_arrow_up_rounded,
-                  color: Color(0xFF38BDF8), size: 18),
             ),
           ],
         ),
@@ -664,299 +498,18 @@ class _QuickInfoCard extends StatelessWidget {
   }
 }
 
-// ════════════════════════════════════════════════════════
-// SIDE PANEL DETAIL (wide layout)
-// ════════════════════════════════════════════════════════
-class _SidePanelDetail extends StatelessWidget {
-  final TaxonNode node;
-  final NAryTreeEngine treeEngine;
-  final ValueChanged<TaxonNode> onNodeSelected;
-  final VoidCallback onFocusCamera;
-  final VoidCallback onToggleExpand;
-  final VoidCallback onOpenLCA;
-
-  const _SidePanelDetail({
-    required this.node,
-    required this.treeEngine,
-    required this.onNodeSelected,
-    required this.onFocusCamera,
-    required this.onToggleExpand,
-    required this.onOpenLCA,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final siblings = node.siblings;
-    final parent = node.parent;
-
-    return Column(
-      children: [
-        // Panel header
-        Container(
-          padding: const EdgeInsets.fromLTRB(16, 14, 16, 12),
-          decoration: const BoxDecoration(
-            border: Border(bottom: BorderSide(color: Color(0xFF1E293B))),
-          ),
-          child: Row(
-            children: [
-              const Icon(Icons.info_outline,
-                  color: Color(0xFF38BDF8), size: 16),
-              const SizedBox(width: 8),
-              Text(
-                'Detail Takson',
-                style: GoogleFonts.inter(
-                  color: const Color(0xFF94A3B8),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.5,
-                ),
-              ),
-            ],
-          ),
-        ),
-
-        // Scrollable content
-        Expanded(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Rank + status badges
-                Wrap(
-                  spacing: 6,
-                  runSpacing: 6,
-                  children: [
-                    _sideBadge(
-                        node.rank.displayName.toUpperCase(), node.rank.color),
-                    if (node.isClade)
-                      _sideBadge('CLADE', const Color(0xFFFBBF24)),
-                    _sideBadge(
-                      node.isExtinct ? 'PUNAH (†)' : 'EXTANT',
-                      node.isExtinct
-                          ? const Color(0xFFEF4444)
-                          : const Color(0xFF10B981),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 14),
-
-                // Scientific name
-                Text(
-                  node.isExtinct
-                      ? '† ${node.scientificName}'
-                      : node.scientificName,
-                  style: TextStyle(
-                    color: const Color(0xFFF1F5F9),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: (node.rank.displayName == 'Species' ||
-                            node.rank.displayName == 'Genus')
-                        ? FontStyle.italic
-                        : FontStyle.normal,
-                  ),
-                ),
-
-                if (node.commonName != null) ...[
-                  const SizedBox(height: 4),
-                  Text(
-                    node.commonName!,
-                    style: GoogleFonts.inter(
-                      color: const Color(0xFF94A3B8),
-                      fontSize: 13,
-                    ),
-                  ),
-                ],
-
-                if (node.temporalRange != null) ...[
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      const Icon(Icons.history_edu,
-                          size: 14, color: Color(0xFF38BDF8)),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: Text(
-                          node.temporalRange!,
-                          style: GoogleFonts.inter(
-                            color: const Color(0xFF38BDF8),
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-
-                if (node.description != null) ...[
-                  const SizedBox(height: 14),
-                  Text(
-                    node.description!,
-                    style: GoogleFonts.inter(
-                      color: const Color(0xFFCBD5E1),
-                      fontSize: 12,
-                      height: 1.6,
-                    ),
-                  ),
-                ],
-
-                const SizedBox(height: 16),
-                Divider(color: const Color(0xFF1E293B).withOpacity(0.7)),
-                const SizedBox(height: 10),
-
-                // Parent
-                if (parent != null) ...[
-                  _sectionLabel('Leluhur Langsung'),
-                  const SizedBox(height: 6),
-                  _NavChip(
-                    node: parent,
-                    onTap: () => onNodeSelected(parent),
-                  ),
-                  const SizedBox(height: 14),
-                ],
-
-                // Siblings
-                if (siblings.isNotEmpty) ...[
-                  _sectionLabel('Saudara Serumpun (${siblings.length})'),
-                  const SizedBox(height: 6),
-                  Wrap(
-                    spacing: 6,
-                    runSpacing: 6,
-                    children: siblings.take(8).map((s) {
-                      return _NavChip(
-                        node: s,
-                        onTap: () => onNodeSelected(s),
-                      );
-                    }).toList(),
-                  ),
-                  if (siblings.length > 8)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 6),
-                      child: Text(
-                        '+${siblings.length - 8} lainnya',
-                        style: GoogleFonts.inter(
-                          color: const Color(0xFF475569),
-                          fontSize: 11,
-                        ),
-                      ),
-                    ),
-                ],
-
-                const SizedBox(height: 20),
-
-                // Action buttons
-                Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF10B981),
-                          foregroundColor: const Color(0xFF022C22),
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                        onPressed: onFocusCamera,
-                        icon: const Icon(Icons.filter_center_focus, size: 16),
-                        label: Text('Fokus Kamera',
-                            style: GoogleFonts.inter(
-                                fontWeight: FontWeight.bold, fontSize: 13)),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFF38BDF8),
-                          side: const BorderSide(color: Color(0xFF0284C7)),
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                        onPressed: onOpenLCA,
-                        icon: const Icon(Icons.hub_outlined, size: 16),
-                        label: Text('Uji Divergensi LCA',
-                            style: GoogleFonts.inter(
-                                fontWeight: FontWeight.bold, fontSize: 13)),
-                      ),
-                    ),
-                    if (node.children.isNotEmpty) ...[
-                      const SizedBox(height: 8),
-                      SizedBox(
-                        width: double.infinity,
-                        child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                            foregroundColor: const Color(0xFF94A3B8),
-                            backgroundColor: const Color(0xFF1E293B),
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                          onPressed: onToggleExpand,
-                          icon: Icon(
-                              node.isExpanded
-                                  ? Icons.unfold_less
-                                  : Icons.unfold_more,
-                              size: 16),
-                          label: Text(
-                              node.isExpanded
-                                  ? 'Tutup Cabang'
-                                  : 'Buka Cabang (${node.children.length})',
-                              style: GoogleFonts.inter(fontSize: 13)),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _sideBadge(String label, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: color.withOpacity(0.5)),
-      ),
-      child: Text(
-        label,
-        style: GoogleFonts.inter(
-          color: color,
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 0.5,
-        ),
-      ),
-    );
-  }
-
-  Widget _sectionLabel(String text) {
-    return Text(
-      text,
-      style: GoogleFonts.inter(
-        color: const Color(0xFF475569),
-        fontSize: 10,
-        fontWeight: FontWeight.bold,
-        letterSpacing: 0.5,
-      ),
-    );
-  }
-}
-
-class _NavChip extends StatelessWidget {
-  final TaxonNode node;
+class _ModeButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool isActive;
   final VoidCallback onTap;
 
-  const _NavChip({required this.node, required this.onTap});
+  const _ModeButton({
+    required this.icon,
+    required this.label,
+    required this.isActive,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -965,33 +518,28 @@ class _NavChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          color: const Color(0xFF1E293B),
+          color: isActive ? const Color(0xFF10B981) : Colors.transparent,
           borderRadius: BorderRadius.circular(7),
-          border: Border.all(color: node.rank.color.withOpacity(0.35)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 6,
-              height: 6,
-              decoration: BoxDecoration(
-                color: node.isExtinct ? Colors.redAccent : node.rank.color,
-                shape: BoxShape.circle,
-              ),
+            Icon(
+              icon,
+              size: 14,
+              color: isActive
+                  ? const Color(0xFF022C22)
+                  : const Color(0xFF94A3B8),
             ),
-            const SizedBox(width: 6),
-            Flexible(
-              child: Text(
-                node.scientificName,
-                style: TextStyle(
-                  color: const Color(0xFFCBD5E1),
-                  fontSize: 11,
-                  fontStyle: (node.rank.displayName == 'Species')
-                      ? FontStyle.italic
-                      : FontStyle.normal,
-                ),
-                overflow: TextOverflow.ellipsis,
+            const SizedBox(width: 5),
+            Text(
+              label,
+              style: GoogleFonts.inter(
+                fontSize: 11.5,
+                fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+                color: isActive
+                    ? const Color(0xFF022C22)
+                    : const Color(0xFF94A3B8),
               ),
             ),
           ],
@@ -1000,39 +548,3 @@ class _NavChip extends StatelessWidget {
     );
   }
 }
-
-// ════════════════════════════════════════════════════════
-// APP BAR ACTION BUTTON
-// ════════════════════════════════════════════════════════
-class _AppBarAction extends StatelessWidget {
-  final IconData icon;
-  final Color color;
-  final String tooltip;
-  final VoidCallback onTap;
-
-  const _AppBarAction({
-    required this.icon,
-    required this.color,
-    required this.tooltip,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 4),
-      child: Tooltip(
-        message: tooltip,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(8),
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            child: Icon(icon, color: color, size: 20),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
