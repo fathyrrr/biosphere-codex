@@ -4,7 +4,10 @@
     "parentId": null,
     "ancestorIds": [],
     "scientificName": "Biota",
-    "commonNames": ["Kehidupan", "Life"],
+    "commonNames": [
+      "Kehidupan",
+      "Life"
+    ],
     "rank": "life",
     "isClade": true,
     "isExtinct": false,
@@ -15,9 +18,13 @@
   {
     "id": 2,
     "parentId": 1,
-    "ancestorIds": [1],
+    "ancestorIds": [
+      1
+    ],
     "scientificName": "Archaea",
-    "commonNames": ["Arkea"],
+    "commonNames": [
+      "Arkea"
+    ],
     "rank": "domain",
     "isClade": false,
     "isExtinct": false,
@@ -28,9 +35,13 @@
   {
     "id": 3,
     "parentId": 1,
-    "ancestorIds": [1],
+    "ancestorIds": [
+      1
+    ],
     "scientificName": "Bacteria",
-    "commonNames": ["Bakteri"],
+    "commonNames": [
+      "Bakteri"
+    ],
     "rank": "domain",
     "isClade": false,
     "isExtinct": false,
@@ -41,9 +52,15 @@
   {
     "id": 4,
     "parentId": 3,
-    "ancestorIds": [1, 3],
+    "ancestorIds": [
+      1,
+      3
+    ],
     "scientificName": "Cyanobacteria",
-    "commonNames": ["Sianobakteri", "Ganggang Biru-Hijau"],
+    "commonNames": [
+      "Sianobakteri",
+      "Ganggang Biru-Hijau"
+    ],
     "rank": "phylum",
     "isClade": false,
     "isExtinct": false,
@@ -54,9 +71,14 @@
   {
     "id": 5,
     "parentId": 3,
-    "ancestorIds": [1, 3],
+    "ancestorIds": [
+      1,
+      3
+    ],
     "scientificName": "Pseudomonadota",
-    "commonNames": ["Proteobacteria"],
+    "commonNames": [
+      "Proteobacteria"
+    ],
     "rank": "phylum",
     "isClade": false,
     "isExtinct": false,
@@ -67,9 +89,15 @@
   {
     "id": 6,
     "parentId": 5,
-    "ancestorIds": [1, 3, 5],
+    "ancestorIds": [
+      1,
+      3,
+      5
+    ],
     "scientificName": "Escherichia coli",
-    "commonNames": ["E. coli"],
+    "commonNames": [
+      "E. coli"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -80,9 +108,13 @@
   {
     "id": 10,
     "parentId": 1,
-    "ancestorIds": [1],
+    "ancestorIds": [
+      1
+    ],
     "scientificName": "Eukaryota",
-    "commonNames": ["Eukariota"],
+    "commonNames": [
+      "Eukariota"
+    ],
     "rank": "domain",
     "isClade": false,
     "isExtinct": false,
@@ -93,9 +125,15 @@
   {
     "id": 11,
     "parentId": 10,
-    "ancestorIds": [1, 10],
+    "ancestorIds": [
+      1,
+      10
+    ],
     "scientificName": "Plantae",
-    "commonNames": ["Tumbuhan", "Plants"],
+    "commonNames": [
+      "Tumbuhan",
+      "Plants"
+    ],
     "rank": "kingdom",
     "isClade": false,
     "isExtinct": false,
@@ -106,9 +144,15 @@
   {
     "id": 12,
     "parentId": 11,
-    "ancestorIds": [1, 10, 11],
+    "ancestorIds": [
+      1,
+      10,
+      11
+    ],
     "scientificName": "Tracheophyta",
-    "commonNames": ["Tumbuhan Berpembuluh"],
+    "commonNames": [
+      "Tumbuhan Berpembuluh"
+    ],
     "rank": "phylum",
     "isClade": true,
     "isExtinct": false,
@@ -119,9 +163,17 @@
   {
     "id": 13,
     "parentId": 12,
-    "ancestorIds": [1, 10, 11, 12],
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12
+    ],
     "scientificName": "Angiospermae",
-    "commonNames": ["Tumbuhan Berbunga", "Flowering Plants"],
+    "commonNames": [
+      "Tumbuhan Berbunga",
+      "Flowering Plants"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -132,9 +184,17 @@
   {
     "id": 14,
     "parentId": 13,
-    "ancestorIds": [1, 10, 11, 12, 13],
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13
+    ],
     "scientificName": "Fagales",
-    "commonNames": ["Ordo Beech dan Ek"],
+    "commonNames": [
+      "Ordo Beech dan Ek"
+    ],
     "rank": "order",
     "isClade": false,
     "isExtinct": false,
@@ -145,9 +205,19 @@
   {
     "id": 15,
     "parentId": 14,
-    "ancestorIds": [1, 10, 11, 12, 13, 14],
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
     "scientificName": "Quercus robur",
-    "commonNames": ["Pohon Ek Eropa", "English Oak"],
+    "commonNames": [
+      "Pohon Ek Eropa",
+      "English Oak"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -158,9 +228,17 @@
   {
     "id": 16,
     "parentId": 12,
-    "ancestorIds": [1, 10, 11, 12],
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12
+    ],
     "scientificName": "Pinophyta",
-    "commonNames": ["Konifer", "Conifers"],
+    "commonNames": [
+      "Konifer",
+      "Conifers"
+    ],
     "rank": "phylum",
     "isClade": false,
     "isExtinct": false,
@@ -171,9 +249,18 @@
   {
     "id": 17,
     "parentId": 16,
-    "ancestorIds": [1, 10, 11, 12, 16],
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      16
+    ],
     "scientificName": "Sequoiadendron giganteum",
-    "commonNames": ["Sequoia Raksasa", "Giant Sequoia"],
+    "commonNames": [
+      "Sequoia Raksasa",
+      "Giant Sequoia"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -184,9 +271,14 @@
   {
     "id": 20,
     "parentId": 10,
-    "ancestorIds": [1, 10],
+    "ancestorIds": [
+      1,
+      10
+    ],
     "scientificName": "Fungi",
-    "commonNames": ["Jamur"],
+    "commonNames": [
+      "Jamur"
+    ],
     "rank": "kingdom",
     "isClade": false,
     "isExtinct": false,
@@ -197,9 +289,15 @@
   {
     "id": 21,
     "parentId": 20,
-    "ancestorIds": [1, 10, 20],
+    "ancestorIds": [
+      1,
+      10,
+      20
+    ],
     "scientificName": "Basidiomycota",
-    "commonNames": ["Jamur Basidium"],
+    "commonNames": [
+      "Jamur Basidium"
+    ],
     "rank": "phylum",
     "isClade": false,
     "isExtinct": false,
@@ -210,9 +308,17 @@
   {
     "id": 22,
     "parentId": 21,
-    "ancestorIds": [1, 10, 20, 21],
+    "ancestorIds": [
+      1,
+      10,
+      20,
+      21
+    ],
     "scientificName": "Amanita muscaria",
-    "commonNames": ["Jamur Lalat Merah", "Fly Agaric"],
+    "commonNames": [
+      "Jamur Lalat Merah",
+      "Fly Agaric"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -223,9 +329,15 @@
   {
     "id": 30,
     "parentId": 10,
-    "ancestorIds": [1, 10],
+    "ancestorIds": [
+      1,
+      10
+    ],
     "scientificName": "Animalia",
-    "commonNames": ["Hewan", "Metazoa"],
+    "commonNames": [
+      "Hewan",
+      "Metazoa"
+    ],
     "rank": "kingdom",
     "isClade": false,
     "isExtinct": false,
@@ -236,9 +348,16 @@
   {
     "id": 31,
     "parentId": 30,
-    "ancestorIds": [1, 10, 30],
+    "ancestorIds": [
+      1,
+      10,
+      30
+    ],
     "scientificName": "Porifera",
-    "commonNames": ["Spons Laut", "Sponges"],
+    "commonNames": [
+      "Spons Laut",
+      "Sponges"
+    ],
     "rank": "phylum",
     "isClade": false,
     "isExtinct": false,
@@ -249,9 +368,15 @@
   {
     "id": 32,
     "parentId": 30,
-    "ancestorIds": [1, 10, 30],
+    "ancestorIds": [
+      1,
+      10,
+      30
+    ],
     "scientificName": "Cnidaria",
-    "commonNames": ["Ubur-ubur dan Karang"],
+    "commonNames": [
+      "Ubur-ubur dan Karang"
+    ],
     "rank": "phylum",
     "isClade": false,
     "isExtinct": false,
@@ -262,9 +387,15 @@
   {
     "id": 35,
     "parentId": 30,
-    "ancestorIds": [1, 10, 30],
+    "ancestorIds": [
+      1,
+      10,
+      30
+    ],
     "scientificName": "Bilateria",
-    "commonNames": ["Hewan Bilateral"],
+    "commonNames": [
+      "Hewan Bilateral"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -275,9 +406,16 @@
   {
     "id": 36,
     "parentId": 35,
-    "ancestorIds": [1, 10, 30, 35],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35
+    ],
     "scientificName": "Protostomia",
-    "commonNames": ["Protostom"],
+    "commonNames": [
+      "Protostom"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -288,9 +426,18 @@
   {
     "id": 37,
     "parentId": 36,
-    "ancestorIds": [1, 10, 30, 35, 36],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36
+    ],
     "scientificName": "Arthropoda",
-    "commonNames": ["Artropoda", "Hewan Berbuku-buku"],
+    "commonNames": [
+      "Artropoda",
+      "Hewan Berbuku-buku"
+    ],
     "rank": "phylum",
     "isClade": false,
     "isExtinct": false,
@@ -301,9 +448,18 @@
   {
     "id": 38,
     "parentId": 37,
-    "ancestorIds": [1, 10, 30, 35, 36, 37],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37
+    ],
     "scientificName": "Trilobita",
-    "commonNames": ["Trilobit"],
+    "commonNames": [
+      "Trilobit"
+    ],
     "rank": "classRank",
     "isClade": false,
     "isExtinct": true,
@@ -314,9 +470,18 @@
   {
     "id": 39,
     "parentId": 37,
-    "ancestorIds": [1, 10, 30, 35, 36, 37],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37
+    ],
     "scientificName": "Insecta",
-    "commonNames": ["Serangga"],
+    "commonNames": [
+      "Serangga"
+    ],
     "rank": "classRank",
     "isClade": false,
     "isExtinct": false,
@@ -327,9 +492,20 @@
   {
     "id": 40,
     "parentId": 39,
-    "ancestorIds": [1, 10, 30, 35, 36, 37, 39],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      39
+    ],
     "scientificName": "Apis mellifera",
-    "commonNames": ["Lebah Madu Barat", "Western Honey Bee"],
+    "commonNames": [
+      "Lebah Madu Barat",
+      "Western Honey Bee"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -340,9 +516,16 @@
   {
     "id": 50,
     "parentId": 35,
-    "ancestorIds": [1, 10, 30, 35],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35
+    ],
     "scientificName": "Deuterostomia",
-    "commonNames": ["Deuterostom"],
+    "commonNames": [
+      "Deuterostom"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -353,9 +536,17 @@
   {
     "id": 60,
     "parentId": 50,
-    "ancestorIds": [1, 10, 30, 35, 50],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50
+    ],
     "scientificName": "Chordata",
-    "commonNames": ["Kordata"],
+    "commonNames": [
+      "Kordata"
+    ],
     "rank": "phylum",
     "isClade": false,
     "isExtinct": false,
@@ -366,9 +557,19 @@
   {
     "id": 70,
     "parentId": 60,
-    "ancestorIds": [1, 10, 30, 35, 50, 60],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60
+    ],
     "scientificName": "Vertebrata",
-    "commonNames": ["Vertebrata", "Hewan Bertulang Belakang"],
+    "commonNames": [
+      "Vertebrata",
+      "Hewan Bertulang Belakang"
+    ],
     "rank": "subphylum",
     "isClade": true,
     "isExtinct": false,
@@ -379,9 +580,19 @@
   {
     "id": 71,
     "parentId": 70,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70
+    ],
     "scientificName": "Chondrichthyes",
-    "commonNames": ["Ikan Bertulang Rawan"],
+    "commonNames": [
+      "Ikan Bertulang Rawan"
+    ],
     "rank": "classRank",
     "isClade": false,
     "isExtinct": false,
@@ -392,9 +603,21 @@
   {
     "id": 72,
     "parentId": 71,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 71],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      71
+    ],
     "scientificName": "Carcharodon carcharias",
-    "commonNames": ["Hiu Putih Besar", "Great White Shark"],
+    "commonNames": [
+      "Hiu Putih Besar",
+      "Great White Shark"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -405,9 +628,20 @@
   {
     "id": 73,
     "parentId": 71,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 71],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      71
+    ],
     "scientificName": "Otodus megalodon",
-    "commonNames": ["Megalodon"],
+    "commonNames": [
+      "Megalodon"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -418,9 +652,20 @@
   {
     "id": 80,
     "parentId": 70,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70
+    ],
     "scientificName": "Tetrapoda",
-    "commonNames": ["Tetrapoda", "Hewan Berkaki Empat"],
+    "commonNames": [
+      "Tetrapoda",
+      "Hewan Berkaki Empat"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -431,9 +676,20 @@
   {
     "id": 81,
     "parentId": 80,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80
+    ],
     "scientificName": "Amphibia",
-    "commonNames": ["Amfibia"],
+    "commonNames": [
+      "Amfibia"
+    ],
     "rank": "classRank",
     "isClade": false,
     "isExtinct": false,
@@ -444,9 +700,22 @@
   {
     "id": 82,
     "parentId": 81,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 81],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      81
+    ],
     "scientificName": "Dendrobates tinctorius",
-    "commonNames": ["Katak Panah Beracun", "Dyeing Poison Dart Frog"],
+    "commonNames": [
+      "Katak Panah Beracun",
+      "Dyeing Poison Dart Frog"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -457,9 +726,20 @@
   {
     "id": 90,
     "parentId": 80,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80
+    ],
     "scientificName": "Amniota",
-    "commonNames": ["Amniota"],
+    "commonNames": [
+      "Amniota"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -470,9 +750,21 @@
   {
     "id": 100,
     "parentId": 90,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90
+    ],
     "scientificName": "Synapsida",
-    "commonNames": ["Sinapsida"],
+    "commonNames": [
+      "Sinapsida"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -483,9 +775,22 @@
   {
     "id": 101,
     "parentId": 100,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ],
     "scientificName": "Dimetrodon limbatus",
-    "commonNames": ["Dimetrodon"],
+    "commonNames": [
+      "Dimetrodon"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -496,9 +801,23 @@
   {
     "id": 110,
     "parentId": 100,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ],
     "scientificName": "Mammalia",
-    "commonNames": ["Mamalia", "Hewan Menyusui"],
+    "commonNames": [
+      "Mamalia",
+      "Hewan Menyusui"
+    ],
     "rank": "classRank",
     "isClade": false,
     "isExtinct": false,
@@ -509,9 +828,24 @@
   {
     "id": 111,
     "parentId": 110,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110
+    ],
     "scientificName": "Monotremata",
-    "commonNames": ["Monotrema", "Mamalia Bertelur"],
+    "commonNames": [
+      "Monotrema",
+      "Mamalia Bertelur"
+    ],
     "rank": "order",
     "isClade": false,
     "isExtinct": false,
@@ -522,9 +856,25 @@
   {
     "id": 112,
     "parentId": 111,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 111],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      111
+    ],
     "scientificName": "Ornithorhynchus anatinus",
-    "commonNames": ["Platipus", "Platypus"],
+    "commonNames": [
+      "Platipus",
+      "Platypus"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -535,9 +885,24 @@
   {
     "id": 120,
     "parentId": 110,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110
+    ],
     "scientificName": "Theria",
-    "commonNames": ["Teria", "Mamalia Melahirkan"],
+    "commonNames": [
+      "Teria",
+      "Mamalia Melahirkan"
+    ],
     "rank": "subclass",
     "isClade": true,
     "isExtinct": false,
@@ -548,9 +913,25 @@
   {
     "id": 121,
     "parentId": 120,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120
+    ],
     "scientificName": "Metatheria",
-    "commonNames": ["Marsupialia", "Mamalia Berkantung"],
+    "commonNames": [
+      "Marsupialia",
+      "Mamalia Berkantung"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -561,9 +942,26 @@
   {
     "id": 122,
     "parentId": 121,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 121],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      121
+    ],
     "scientificName": "Macropus rufus",
-    "commonNames": ["Kanguru Merah", "Red Kangaroo"],
+    "commonNames": [
+      "Kanguru Merah",
+      "Red Kangaroo"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -574,9 +972,25 @@
   {
     "id": 130,
     "parentId": 120,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120
+    ],
     "scientificName": "Placentalia",
-    "commonNames": ["Plasentalia", "Mamalia Berplasenta"],
+    "commonNames": [
+      "Plasentalia",
+      "Mamalia Berplasenta"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -587,9 +1001,25 @@
   {
     "id": 131,
     "parentId": 130,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130
+    ],
     "scientificName": "Proboscidea",
-    "commonNames": ["Gajah dan Belalai"],
+    "commonNames": [
+      "Gajah dan Belalai"
+    ],
     "rank": "order",
     "isClade": false,
     "isExtinct": false,
@@ -600,9 +1030,27 @@
   {
     "id": 132,
     "parentId": 131,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 131],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      131
+    ],
     "scientificName": "Mammuthus primigenius",
-    "commonNames": ["Mamut Berbulu", "Woolly Mammoth"],
+    "commonNames": [
+      "Mamut Berbulu",
+      "Woolly Mammoth"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -613,9 +1061,25 @@
   {
     "id": 133,
     "parentId": 130,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130
+    ],
     "scientificName": "Carnivora",
-    "commonNames": ["Karnivora"],
+    "commonNames": [
+      "Karnivora"
+    ],
     "rank": "order",
     "isClade": false,
     "isExtinct": false,
@@ -626,9 +1090,27 @@
   {
     "id": 134,
     "parentId": 133,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 133],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133
+    ],
     "scientificName": "Felidae",
-    "commonNames": ["Keluarga Kucing", "Cats"],
+    "commonNames": [
+      "Keluarga Kucing",
+      "Cats"
+    ],
     "rank": "family",
     "isClade": false,
     "isExtinct": false,
@@ -639,9 +1121,28 @@
   {
     "id": 135,
     "parentId": 134,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 133, 134],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      134
+    ],
     "scientificName": "Panthera leo",
-    "commonNames": ["Singa", "Lion"],
+    "commonNames": [
+      "Singa",
+      "Lion"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -652,9 +1153,28 @@
   {
     "id": 136,
     "parentId": 134,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 133, 134],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      134
+    ],
     "scientificName": "Smilodon fatalis",
-    "commonNames": ["Kucing Gigi Pedang", "Saber-toothed Cat"],
+    "commonNames": [
+      "Kucing Gigi Pedang",
+      "Saber-toothed Cat"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -665,9 +1185,27 @@
   {
     "id": 137,
     "parentId": 133,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 133],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133
+    ],
     "scientificName": "Canidae",
-    "commonNames": ["Keluarga Anjing", "Dogs"],
+    "commonNames": [
+      "Keluarga Anjing",
+      "Dogs"
+    ],
     "rank": "family",
     "isClade": false,
     "isExtinct": false,
@@ -678,9 +1216,28 @@
   {
     "id": 138,
     "parentId": 137,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 133, 137],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      137
+    ],
     "scientificName": "Canis lupus",
-    "commonNames": ["Serigala Abu-abu", "Gray Wolf"],
+    "commonNames": [
+      "Serigala Abu-abu",
+      "Gray Wolf"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -691,9 +1248,25 @@
   {
     "id": 139,
     "parentId": 130,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130
+    ],
     "scientificName": "Cetacea",
-    "commonNames": ["Paus dan Lumba-lumba"],
+    "commonNames": [
+      "Paus dan Lumba-lumba"
+    ],
     "rank": "suborder",
     "isClade": true,
     "isExtinct": false,
@@ -704,9 +1277,27 @@
   {
     "id": 140,
     "parentId": 139,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 139],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      139
+    ],
     "scientificName": "Balaenoptera musculus",
-    "commonNames": ["Paus Biru", "Blue Whale"],
+    "commonNames": [
+      "Paus Biru",
+      "Blue Whale"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -717,9 +1308,25 @@
   {
     "id": 150,
     "parentId": 130,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130
+    ],
     "scientificName": "Primates",
-    "commonNames": ["Primata"],
+    "commonNames": [
+      "Primata"
+    ],
     "rank": "order",
     "isClade": false,
     "isExtinct": false,
@@ -730,9 +1337,27 @@
   {
     "id": 160,
     "parentId": 150,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 150],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150
+    ],
     "scientificName": "Hominidae",
-    "commonNames": ["Kera Besar", "Great Apes"],
+    "commonNames": [
+      "Kera Besar",
+      "Great Apes"
+    ],
     "rank": "family",
     "isClade": false,
     "isExtinct": false,
@@ -743,9 +1368,28 @@
   {
     "id": 161,
     "parentId": 160,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 150, 160],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      160
+    ],
     "scientificName": "Pongo abelii",
-    "commonNames": ["Orangutan Sumatera", "Sumatran Orangutan"],
+    "commonNames": [
+      "Orangutan Sumatera",
+      "Sumatran Orangutan"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -756,9 +1400,28 @@
   {
     "id": 162,
     "parentId": 160,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 150, 160],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      160
+    ],
     "scientificName": "Gorilla beringei",
-    "commonNames": ["Gorila Timur", "Eastern Gorilla"],
+    "commonNames": [
+      "Gorila Timur",
+      "Eastern Gorilla"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -769,9 +1432,28 @@
   {
     "id": 163,
     "parentId": 160,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 150, 160],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      160
+    ],
     "scientificName": "Pan troglodytes",
-    "commonNames": ["Simpanse", "Chimpanzee"],
+    "commonNames": [
+      "Simpanse",
+      "Chimpanzee"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -782,9 +1464,27 @@
   {
     "id": 170,
     "parentId": 160,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 150, 160],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      160
+    ],
     "scientificName": "Homo",
-    "commonNames": ["Genus Manusia"],
+    "commonNames": [
+      "Genus Manusia"
+    ],
     "rank": "genus",
     "isClade": false,
     "isExtinct": false,
@@ -795,9 +1495,29 @@
   {
     "id": 171,
     "parentId": 170,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 150, 160, 170],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      160,
+      170
+    ],
     "scientificName": "Homo neanderthalensis",
-    "commonNames": ["Manusia Purba Neanderthal", "Neanderthal"],
+    "commonNames": [
+      "Manusia Purba Neanderthal",
+      "Neanderthal"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -808,9 +1528,29 @@
   {
     "id": 172,
     "parentId": 170,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 100, 110, 120, 130, 150, 160, 170],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      160,
+      170
+    ],
     "scientificName": "Homo sapiens",
-    "commonNames": ["Manusia Modern", "Human"],
+    "commonNames": [
+      "Manusia Modern",
+      "Human"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -821,9 +1561,21 @@
   {
     "id": 200,
     "parentId": 90,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90
+    ],
     "scientificName": "Sauropsida",
-    "commonNames": ["Reptil dan Moyang Burung"],
+    "commonNames": [
+      "Reptil dan Moyang Burung"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -834,9 +1586,22 @@
   {
     "id": 201,
     "parentId": 200,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200
+    ],
     "scientificName": "Squamata",
-    "commonNames": ["Kadal dan Ular"],
+    "commonNames": [
+      "Kadal dan Ular"
+    ],
     "rank": "order",
     "isClade": false,
     "isExtinct": false,
@@ -847,9 +1612,24 @@
   {
     "id": 202,
     "parentId": 201,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 201],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      201
+    ],
     "scientificName": "Varanus komodoensis",
-    "commonNames": ["Komodo", "Komodo Dragon"],
+    "commonNames": [
+      "Komodo",
+      "Komodo Dragon"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -860,9 +1640,23 @@
   {
     "id": 210,
     "parentId": 200,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200
+    ],
     "scientificName": "Archosauria",
-    "commonNames": ["Arkosaurus", "Kadal Penguasa"],
+    "commonNames": [
+      "Arkosaurus",
+      "Kadal Penguasa"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -873,9 +1667,23 @@
   {
     "id": 211,
     "parentId": 210,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210
+    ],
     "scientificName": "Crocodylia",
-    "commonNames": ["Buaya dan Aligator"],
+    "commonNames": [
+      "Buaya dan Aligator"
+    ],
     "rank": "order",
     "isClade": false,
     "isExtinct": false,
@@ -886,9 +1694,23 @@
   {
     "id": 220,
     "parentId": 210,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210
+    ],
     "scientificName": "Dinosauria",
-    "commonNames": ["Dinosaurus"],
+    "commonNames": [
+      "Dinosaurus"
+    ],
     "rank": "clade",
     "isClade": true,
     "isExtinct": false,
@@ -899,9 +1721,24 @@
   {
     "id": 221,
     "parentId": 220,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220
+    ],
     "scientificName": "Ornithischia",
-    "commonNames": ["Dinosaurus Pinggul Burung"],
+    "commonNames": [
+      "Dinosaurus Pinggul Burung"
+    ],
     "rank": "order",
     "isClade": false,
     "isExtinct": true,
@@ -912,9 +1749,25 @@
   {
     "id": 222,
     "parentId": 221,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 221],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      221
+    ],
     "scientificName": "Triceratops horridus",
-    "commonNames": ["Triceratops"],
+    "commonNames": [
+      "Triceratops"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -925,9 +1778,25 @@
   {
     "id": 223,
     "parentId": 221,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 221],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      221
+    ],
     "scientificName": "Stegosaurus stenops",
-    "commonNames": ["Stegosaurus"],
+    "commonNames": [
+      "Stegosaurus"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -938,9 +1807,24 @@
   {
     "id": 230,
     "parentId": 220,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220
+    ],
     "scientificName": "Saurischia",
-    "commonNames": ["Dinosaurus Pinggul Kadal"],
+    "commonNames": [
+      "Dinosaurus Pinggul Kadal"
+    ],
     "rank": "order",
     "isClade": false,
     "isExtinct": false,
@@ -951,9 +1835,26 @@
   {
     "id": 231,
     "parentId": 230,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 230],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230
+    ],
     "scientificName": "Sauropoda",
-    "commonNames": ["Sauropoda", "Dinosaurus Leher Panjang"],
+    "commonNames": [
+      "Sauropoda",
+      "Dinosaurus Leher Panjang"
+    ],
     "rank": "suborder",
     "isClade": true,
     "isExtinct": true,
@@ -964,9 +1865,26 @@
   {
     "id": 232,
     "parentId": 231,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 230, 231],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      231
+    ],
     "scientificName": "Brachiosaurus altithorax",
-    "commonNames": ["Brachiosaurus"],
+    "commonNames": [
+      "Brachiosaurus"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -977,9 +1895,26 @@
   {
     "id": 240,
     "parentId": 230,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 230],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230
+    ],
     "scientificName": "Theropoda",
-    "commonNames": ["Theropoda", "Dinosaurus Kaki Burung"],
+    "commonNames": [
+      "Theropoda",
+      "Dinosaurus Kaki Burung"
+    ],
     "rank": "suborder",
     "isClade": true,
     "isExtinct": false,
@@ -990,9 +1925,27 @@
   {
     "id": 241,
     "parentId": 240,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 230, 240],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240
+    ],
     "scientificName": "Tyrannosaurus rex",
-    "commonNames": ["T-Rex", "Raja Dinosaurus"],
+    "commonNames": [
+      "T-Rex",
+      "Raja Dinosaurus"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -1003,9 +1956,26 @@
   {
     "id": 242,
     "parentId": 240,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 230, 240],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240
+    ],
     "scientificName": "Velociraptor mongoliensis",
-    "commonNames": ["Velociraptor"],
+    "commonNames": [
+      "Velociraptor"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": true,
@@ -1016,9 +1986,28 @@
   {
     "id": 250,
     "parentId": 240,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 230, 240],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240
+    ],
     "scientificName": "Aves",
-    "commonNames": ["Burung", "Dinosaurus Avian", "Birds"],
+    "commonNames": [
+      "Burung",
+      "Dinosaurus Avian",
+      "Birds"
+    ],
     "rank": "classRank",
     "isClade": true,
     "isExtinct": false,
@@ -1029,9 +2018,28 @@
   {
     "id": 251,
     "parentId": 250,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 230, 240, 250],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
     "scientificName": "Corvus corax",
-    "commonNames": ["Burung Gagak Biasa", "Common Raven"],
+    "commonNames": [
+      "Burung Gagak Biasa",
+      "Common Raven"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
@@ -1042,15 +2050,3457 @@
   {
     "id": 252,
     "parentId": 250,
-    "ancestorIds": [1, 10, 30, 35, 50, 60, 70, 80, 90, 200, 210, 220, 230, 240, 250],
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
     "scientificName": "Aptenodytes forsteri",
-    "commonNames": ["Penguin Kaisar", "Emperor Penguin"],
+    "commonNames": [
+      "Penguin Kaisar",
+      "Emperor Penguin"
+    ],
     "rank": "species",
     "isClade": false,
     "isExtinct": false,
     "temporalRange": "Pleistocene - Present",
     "description": "Spesies penguin tertinggi yang bertahan hidup dan berbiak di suhu dingin ekstrem es laut Antartika.",
     "depth": 15
+  },
+  {
+    "id": 300,
+    "parentId": 11,
+    "ancestorIds": [
+      1,
+      10,
+      11
+    ],
+    "scientificName": "Bryophyta",
+    "commonNames": [
+      "Tumbuhan Lumut Daun",
+      "Mosses"
+    ],
+    "rank": "phylum",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Ordovician - Present",
+    "description": "Tumbuhan non-vaskular berspora yang menyerap air dan hara langsung melalui sel tanpa xilem dan floem sejati.",
+    "imageUrl": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600&q=80",
+    "depth": 3
+  },
+  {
+    "id": 301,
+    "parentId": 300,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      300
+    ],
+    "scientificName": "Sphagnum palustre",
+    "commonNames": [
+      "Lumut Gambut",
+      "Peat Moss"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Lumut gambut pembentuk lahan basah yang mampu menampung air hingga 20 kali berat keringnya.",
+    "imageUrl": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 302,
+    "parentId": 12,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12
+    ],
+    "scientificName": "Polypodiopsida",
+    "commonNames": [
+      "Tumbuhan Paku Sejati",
+      "Ferns"
+    ],
+    "rank": "class",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Devonian - Present",
+    "description": "Tumbuhan berpembuluh purba yang berkembang biak dengan spora dan memiliki daun muda menggulung (sirkina).",
+    "imageUrl": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 303,
+    "parentId": 302,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      302
+    ],
+    "scientificName": "Asplenium nidus",
+    "commonNames": [
+      "Paku Sarang Burung"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Epifit hutan hujan tropis yang membentuk mangkuk penampung humus dan air di tajuk pohon kanopi.",
+    "imageUrl": "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80",
+    "depth": 5
+  },
+  {
+    "id": 304,
+    "parentId": 16,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      16
+    ],
+    "scientificName": "Pinus merkusii",
+    "commonNames": [
+      "Tusam Sumatera",
+      "Merkus Pine"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Cretaceous - Present",
+    "description": "Satu-satunya spesies pohon pinus yang sebarannya menyeberangi khatulistiwa ke belahan bumi selatan.",
+    "imageUrl": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80",
+    "depth": 5
+  },
+  {
+    "id": 305,
+    "parentId": 12,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12
+    ],
+    "scientificName": "Ginkgophyta",
+    "commonNames": [
+      "Ginkgo / Pohon Rambut Gadis"
+    ],
+    "rank": "phylum",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Permian - Present",
+    "description": "Filum gymnospermae purba dengan satu-satunya spesies sintas yang dikenal sebagai fosil hidup.",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 306,
+    "parentId": 305,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      305
+    ],
+    "scientificName": "Ginkgo biloba",
+    "commonNames": [
+      "Pohon Ginkgo"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Permian - Present",
+    "description": "Pohon fosil hidup dengan daun berbentuk kipas unik dan resistensi luar biasa terhadap polusi dan radiasi.",
+    "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80",
+    "depth": 5
+  },
+  {
+    "id": 307,
+    "parentId": 13,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13
+    ],
+    "scientificName": "Liliopsida",
+    "commonNames": [
+      "Monokotil",
+      "Monocots"
+    ],
+    "rank": "class",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kelompok tumbuhan berbunga dengan satu kotiledon, pertulangan daun sejajar, dan berkas pembuluh tersebar.",
+    "imageUrl": null,
+    "depth": 5
+  },
+  {
+    "id": 308,
+    "parentId": 307,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      307
+    ],
+    "scientificName": "Poales",
+    "commonNames": [
+      "Bangsa Rumput-rumputan"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 6
+  },
+  {
+    "id": 309,
+    "parentId": 308,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      307,
+      308
+    ],
+    "scientificName": "Oryza sativa",
+    "commonNames": [
+      "Padi Asia",
+      "Rice"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Tanaman pangan terpenting peradaban manusia yang memasok kalori untuk lebih dari separuh populasi dunia.",
+    "imageUrl": "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 310,
+    "parentId": 308,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      307,
+      308
+    ],
+    "scientificName": "Zea mays",
+    "commonNames": [
+      "Jagung",
+      "Maize"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Serealia domestikasi Mesoamerika dengan efisiensi fotosintesis C4 tinggi dan tongkol berbiji rapat.",
+    "imageUrl": "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 311,
+    "parentId": 307,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      307
+    ],
+    "scientificName": "Asparagales",
+    "commonNames": [
+      "Bangsa Anggrek-anggrekan"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 6
+  },
+  {
+    "id": 312,
+    "parentId": 311,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      307,
+      311
+    ],
+    "scientificName": "Phalaenopsis amabilis",
+    "commonNames": [
+      "Anggrek Bulan"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Puspa Pesona nasional Indonesia dengan kelopak putih lebar memukau yang tumbuh epifit di kanopi.",
+    "imageUrl": "https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 313,
+    "parentId": 13,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13
+    ],
+    "scientificName": "Eudicotyledonae",
+    "commonNames": [
+      "Eudikotil",
+      "True Dicots"
+    ],
+    "rank": "class",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kelompok tumbuhan berbunga dengan dua kotiledon dan serbuk sari berpori trikolpat.",
+    "imageUrl": null,
+    "depth": 5
+  },
+  {
+    "id": 314,
+    "parentId": 313,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      313
+    ],
+    "scientificName": "Rosales",
+    "commonNames": [
+      "Bangsa Mawar-mawaran"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 6
+  },
+  {
+    "id": 315,
+    "parentId": 314,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      313,
+      314
+    ],
+    "scientificName": "Rosa gallica",
+    "commonNames": [
+      "Mawar Prancis"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies mawar kuno berbunga harum yang menjadi moyang kultivar mawar hias modern dunia.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 316,
+    "parentId": 313,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      313
+    ],
+    "scientificName": "Asterales",
+    "commonNames": [
+      "Bangsa Bunga Matahari"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 6
+  },
+  {
+    "id": 317,
+    "parentId": 316,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      313,
+      316
+    ],
+    "scientificName": "Helianthus annuus",
+    "commonNames": [
+      "Bunga Matahari"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Tumbuhan berinfloresens kapitulum besar heliotropik penghasil biji kuaci dan minyak nabati berkualitas.",
+    "imageUrl": "https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 318,
+    "parentId": 313,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      313
+    ],
+    "scientificName": "Nepenthes rajah",
+    "commonNames": [
+      "Kantong Semar Raja"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Tanaman karnivora endemik Gunung Kinabalu berkantung raksasa hingga 3,5 liter yang mampu menjebak vertebrata kecil.",
+    "imageUrl": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+    "depth": 6
+  },
+  {
+    "id": 320,
+    "parentId": 20,
+    "ancestorIds": [
+      1,
+      10,
+      20
+    ],
+    "scientificName": "Ascomycota",
+    "commonNames": [
+      "Jamur Kantung",
+      "Sac Fungi"
+    ],
+    "rank": "phylum",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Silurian - Present",
+    "description": "Filum jamur terbesar yang memproduksi spora seksual di dalam kantung mikroskopis yang disebut askus.",
+    "imageUrl": null,
+    "depth": 3
+  },
+  {
+    "id": 321,
+    "parentId": 320,
+    "ancestorIds": [
+      1,
+      10,
+      20,
+      320
+    ],
+    "scientificName": "Saccharomyces cerevisiae",
+    "commonNames": [
+      "Ragi Roti / Khamir"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Organisme model eukariotik uniseluler pelopor fermentasi roti, bir, dan bioteknologi rekayasa genetika.",
+    "imageUrl": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 322,
+    "parentId": 320,
+    "ancestorIds": [
+      1,
+      10,
+      20,
+      320
+    ],
+    "scientificName": "Penicillium chrysogenum",
+    "commonNames": [
+      "Kapang Penisilin"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Penghasil molekul antibiotik penisilin pertama yang merevolusi pengobatan infeksi bakteri di dunia kedokteran.",
+    "imageUrl": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 323,
+    "parentId": 21,
+    "ancestorIds": [
+      1,
+      10,
+      20,
+      21
+    ],
+    "scientificName": "Agaricus bisporus",
+    "commonNames": [
+      "Jamur Kancing / Portobello"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Jamur pangan paling banyak dibudidayakan di dunia dengan tudung payung berdaging lezat dan kaya protein.",
+    "imageUrl": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 324,
+    "parentId": 21,
+    "ancestorIds": [
+      1,
+      10,
+      20,
+      21
+    ],
+    "scientificName": "Ganoderma lucidum",
+    "commonNames": [
+      "Jamur Lingzhi"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Jamur kayu obat legendaris penguat imun dengan tudung mengkilap bertekstur pernis perkayuan.",
+    "imageUrl": "https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 330,
+    "parentId": 32,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      32
+    ],
+    "scientificName": "Chironex fleckeri",
+    "commonNames": [
+      "Ubur-ubur Kotak Laut",
+      "Sea Wasp"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Salah satu hewan laut paling mematikan dengan tentakel berjarum knidosit neurotoksin berkecepatan mikrodetik.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 331,
+    "parentId": 32,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      32
+    ],
+    "scientificName": "Aurelia aurita",
+    "commonNames": [
+      "Ubur-ubur Bulan",
+      "Moon Jelly"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Ubur-ubur bercincin tapal kuda transparan bioluminesen yang mengapung di perairan pantai dunia.",
+    "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 335,
+    "parentId": 36,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36
+    ],
+    "scientificName": "Mollusca",
+    "commonNames": [
+      "Moluska",
+      "Hewan Bertubuh Lunak"
+    ],
+    "rank": "phylum",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Cambrian - Present",
+    "description": "Filum hewan invertebrata bertubuh lunak dengan mantel, radula, dan sering dilindungi cangkang kalsium karbonat.",
+    "imageUrl": null,
+    "depth": 5
+  },
+  {
+    "id": 336,
+    "parentId": 335,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      335
+    ],
+    "scientificName": "Cephalopoda",
+    "commonNames": [
+      "Sefalopoda",
+      "Gurita & Cumi-cumi"
+    ],
+    "rank": "class",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Cambrian - Present",
+    "description": "Kelas moluska laut cerdas berkaki kepala dengan sistem saraf terpusat kompleks, mata berlensa, dan kromatofor kamuflase.",
+    "imageUrl": null,
+    "depth": 6
+  },
+  {
+    "id": 337,
+    "parentId": 336,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      335,
+      336
+    ],
+    "scientificName": "Octopus vulgaris",
+    "commonNames": [
+      "Gurita Karang Umum",
+      "Common Octopus"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Invertebrata tercerdas di lautan dengan tiga jantung, darah tembaga biru, dan kecerdasan memecahkan teka-teki.",
+    "imageUrl": "https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 338,
+    "parentId": 336,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      335,
+      336
+    ],
+    "scientificName": "Architeuthis dux",
+    "commonNames": [
+      "Cumi-cumi Raksasa",
+      "Giant Squid"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Mahluk laut dalam misterius bermata sebesar piring makan dengan panjang tubuh mencapai hingga 13 meter.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 339,
+    "parentId": 336,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      335,
+      336
+    ],
+    "scientificName": "Hapalochlaena lunulata",
+    "commonNames": [
+      "Gurita Cincin Biru"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Gurita mini beracun mematikan yang menyala dengan cincin biru elektrik saat terancam tetrodotoksin kuat.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 340,
+    "parentId": 335,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      335
+    ],
+    "scientificName": "Gastropoda",
+    "commonNames": [
+      "Gastropoda",
+      "Siput & Keong"
+    ],
+    "rank": "class",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 6
+  },
+  {
+    "id": 341,
+    "parentId": 340,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      335,
+      340
+    ],
+    "scientificName": "Glaucus atlanticus",
+    "commonNames": [
+      "Naga Biru Laut",
+      "Blue Dragon Slug"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Siput laut pelagis cantik bertubuh biru perak yang berenang terbalik memangsa ubur-ubur beracun.",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 342,
+    "parentId": 335,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      335
+    ],
+    "scientificName": "Tridacna gigas",
+    "commonNames": [
+      "Kima Raksasa",
+      "Giant Clam"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kerang bivalvia terbesar di dunia dengan berat melebihi 200 kg yang bersimbiosis fotosintetik dengan alga zooksantela.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 6
+  },
+  {
+    "id": 345,
+    "parentId": 37,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37
+    ],
+    "scientificName": "Chelicerata",
+    "commonNames": [
+      "Keliserata",
+      "Laba-laba & Kalajengking"
+    ],
+    "rank": "subphylum",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 6
+  },
+  {
+    "id": 346,
+    "parentId": 345,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      345
+    ],
+    "scientificName": "Araneae",
+    "commonNames": [
+      "Bangsa Laba-laba",
+      "Spiders"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 7
+  },
+  {
+    "id": 347,
+    "parentId": 346,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      345,
+      346
+    ],
+    "scientificName": "Latrodectus mactans",
+    "commonNames": [
+      "Laba-laba Janda Hitam",
+      "Black Widow"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Laba-laba betina berpenanda jam pasir merah dengan bisa neurotoksik latrotoksin yang melumpuhkan mangsa.",
+    "imageUrl": "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 348,
+    "parentId": 345,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      345
+    ],
+    "scientificName": "Scorpiones",
+    "commonNames": [
+      "Bangsa Kalajengking"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 7
+  },
+  {
+    "id": 349,
+    "parentId": 348,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      345,
+      348
+    ],
+    "scientificName": "Pandinus imperator",
+    "commonNames": [
+      "Kalajengking Kaisar",
+      "Emperor Scorpion"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kalajengking hitam raksasa hutan hujan Afrika barat yang berpendar hijau terang di bawah sinar ultraviolet.",
+    "imageUrl": "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 350,
+    "parentId": 345,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      345
+    ],
+    "scientificName": "Limulus polyphemus",
+    "commonNames": [
+      "Belangkas Atlantik",
+      "Horseshoe Crab"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Ordovician - Present",
+    "description": "Fosil hidup laut berdarah biru kaya tembaga pembawa amebosit LAL berharga tinggi untuk uji sterilitas vaksin farmasi.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 351,
+    "parentId": 37,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37
+    ],
+    "scientificName": "Crustacea",
+    "commonNames": [
+      "Krustasea",
+      "Udang & Kepiting"
+    ],
+    "rank": "subphylum",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 6
+  },
+  {
+    "id": 352,
+    "parentId": 351,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      351
+    ],
+    "scientificName": "Birgus latro",
+    "commonNames": [
+      "Ketam Kenari",
+      "Coconut Crab"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Arthropoda darat terbesar di bumi dengan daya jepit capit sekuat gigitan singa yang mampu membelah kelapa tua.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 353,
+    "parentId": 351,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      351
+    ],
+    "scientificName": "Homarus americanus",
+    "commonNames": [
+      "Lobster Amerika"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Krustasea laut berumur panjang dengan aktivitas enzim telomerase tinggi yang mencegah penuaan seluler.",
+    "imageUrl": "https://images.unsplash.com/photo-1535402803947-a950d5f7ae4b?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 355,
+    "parentId": 39,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      39
+    ],
+    "scientificName": "Lepidoptera",
+    "commonNames": [
+      "Kupu-kupu & Ngengat"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 7
+  },
+  {
+    "id": 356,
+    "parentId": 355,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      39,
+      355
+    ],
+    "scientificName": "Danaus plexippus",
+    "commonNames": [
+      "Kupu-kupu Monarki"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Serangga penjelajah legendaris yang bermigrasi sejauh 4.000 km antar generasi dari Kanada ke hutan cemara Meksiko.",
+    "imageUrl": "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 357,
+    "parentId": 39,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      39
+    ],
+    "scientificName": "Coleoptera",
+    "commonNames": [
+      "Bangsa Kumbang",
+      "Beetles"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 7
+  },
+  {
+    "id": 358,
+    "parentId": 357,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      39,
+      357
+    ],
+    "scientificName": "Dynastes hercules",
+    "commonNames": [
+      "Kumbang Hercules"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kumbang bertanduk capit raksasa terkuat di dunia yang sanggup mengangkat beban hingga 850 kali bobot tubuhnya.",
+    "imageUrl": "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 359,
+    "parentId": 39,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      39
+    ],
+    "scientificName": "Diptera",
+    "commonNames": [
+      "Bangsa Lalat & Nyamuk"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 7
+  },
+  {
+    "id": 360,
+    "parentId": 359,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      37,
+      39,
+      359
+    ],
+    "scientificName": "Drosophila melanogaster",
+    "commonNames": [
+      "Lalat Buah"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Organisme model genetika terkemuka abad ke-20 yang mendasari penemuan kromosom, mutasi, dan ritme sirkadian.",
+    "imageUrl": "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 365,
+    "parentId": 71,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      71
+    ],
+    "scientificName": "Rhincodon typus",
+    "commonNames": [
+      "Hiu Paus",
+      "Whale Shark"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Ikan terbesar di dunia berpanjang hingga 18 meter yang jinak menyaring plankton dan krill mikroskopis di lautan hangat.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 366,
+    "parentId": 71,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      71
+    ],
+    "scientificName": "Mobula birostris",
+    "commonNames": [
+      "Pari Manta Raksasa",
+      "Giant Manta Ray"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Pari terbesar dengan bentang sayap sirip dada hingga 7 meter dan rasio massa otak-tubuh tertinggi di antara ikan.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 370,
+    "parentId": 70,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70
+    ],
+    "scientificName": "Actinopterygii",
+    "commonNames": [
+      "Ikan Sirip Duri / Ikan Sejati",
+      "Ray-finned Fish"
+    ],
+    "rank": "class",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Silurian - Present",
+    "description": "Kelas vertebrata terbesar dengan lebih dari 30.000 spesies ikan berkerangka tulang keras dan gelembung renang.",
+    "imageUrl": null,
+    "depth": 7
+  },
+  {
+    "id": 371,
+    "parentId": 370,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      370
+    ],
+    "scientificName": "Amphiprion ocellaris",
+    "commonNames": [
+      "Ikan Badut / Clownfish",
+      "Nemo"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Ikan karang bergaris oranye-putih yang kebal sengatan anemon laut tempatnya bersimbiosis mutualisme erat.",
+    "imageUrl": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 372,
+    "parentId": 370,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      370
+    ],
+    "scientificName": "Hippocampus bargibanti",
+    "commonNames": [
+      "Kuda Laut Kerdil",
+      "Pygmy Seahorse"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kuda laut mini sepanjang 2 cm dengan kamuflase tuberkel sempurna meniru polip karang kipas laut tempat tinggalnya.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 373,
+    "parentId": 370,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      370
+    ],
+    "scientificName": "Thunnus thynnus",
+    "commonNames": [
+      "Tuna Sirip Biru Atlantik"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Predator puncak perenang cepat berotot regional endotermik yang mampu melesat menembus samudra hingga 70 km/jam.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 374,
+    "parentId": 370,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      370
+    ],
+    "scientificName": "Salmo salar",
+    "commonNames": [
+      "Salmon Atlantik"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Ikan anadromus legendaris yang bermigrasi ribuan mil melawan arus sungai berjeram menuju tempat kelahirannya untuk bertelur.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 375,
+    "parentId": 70,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70
+    ],
+    "scientificName": "Sarcopterygii",
+    "commonNames": [
+      "Ikan Sirip Berdaging",
+      "Lobe-finned Fish"
+    ],
+    "rank": "class",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Silurian - Present",
+    "description": "Garis keturunan ikan purba dengan sirip bertulang mirip tungkai tetrapoda, jembatan evolusi ikan menuju daratan.",
+    "imageUrl": null,
+    "depth": 7
+  },
+  {
+    "id": 376,
+    "parentId": 375,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      375
+    ],
+    "scientificName": "Latimeria chalumnae",
+    "commonNames": [
+      "Koelakan / Fosil Hidup",
+      "Coelacanth"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Devonian - Present",
+    "description": "Ikan laut dalam berengsel intrakranial purba yang sempat dikira punah 66 juta tahun lalu hingga ditemukan hidup di perairan Afrika dan Sulawesi.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 380,
+    "parentId": 81,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      81
+    ],
+    "scientificName": "Ambystoma mexicanum",
+    "commonNames": [
+      "Axolotl / Salamander Meksiko"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Amfibi neotenik berinsang luar feathery yang mempertahankan wujud larva seumur hidup dan mampu meregenerasi tungkai serta jaringan jantung.",
+    "imageUrl": "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=600&q=80",
+    "depth": 9
+  },
+  {
+    "id": 381,
+    "parentId": 81,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      81
+    ],
+    "scientificName": "Agalychnis callidryas",
+    "commonNames": [
+      "Katak Pohon Mata Merah"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Katak nokturnal kanopi neotropis dengan mata merah ruby menyala dan selaput jari jingga untuk mengejutkan predator.",
+    "imageUrl": "https://images.unsplash.com/photo-1550950158-d0d960dff51b?auto=format&fit=crop&w=600&q=80",
+    "depth": 9
+  },
+  {
+    "id": 382,
+    "parentId": 81,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      81
+    ],
+    "scientificName": "Andrias davidianus",
+    "commonNames": [
+      "Salamander Raksasa Tiongkok"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Amfibi hidup terbesar di bumi berpanjang hingga 1,8 meter yang hidup di aliran sungai berbatu pegunungan sejuk.",
+    "imageUrl": "https://images.unsplash.com/photo-1550950158-d0d960dff51b?auto=format&fit=crop&w=600&q=80",
+    "depth": 9
+  },
+  {
+    "id": 385,
+    "parentId": 201,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      201
+    ],
+    "scientificName": "Ophiophagus hannah",
+    "commonNames": [
+      "Ular King Cobra"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Ular berbisa terpanjang di dunia (hingga 5,5 meter) pemangsa ular lain dengan kap leher mengembang dan bisa neurotoksik melimpah.",
+    "imageUrl": "https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&w=600&q=80",
+    "depth": 11
+  },
+  {
+    "id": 386,
+    "parentId": 201,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      201
+    ],
+    "scientificName": "Chamaeleo calyptratus",
+    "commonNames": [
+      "Bunglon Yaman"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Reptil berhelm kaskue tanduk dengan mata stereoskopis independen 360 derajat dan lidah balistik secepat kilat.",
+    "imageUrl": "https://images.unsplash.com/photo-1563281577-a7be47e20db9?auto=format&fit=crop&w=600&q=80",
+    "depth": 11
+  },
+  {
+    "id": 387,
+    "parentId": 200,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200
+    ],
+    "scientificName": "Testudines",
+    "commonNames": [
+      "Bangsa Kura-kura & Penyu",
+      "Turtles"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Triassic - Present",
+    "description": "Reptil berkarapas dan plastron tulang pelindung purba yang telah bertahan melintasi beberapa kepunahan massal bumi.",
+    "imageUrl": null,
+    "depth": 10
+  },
+  {
+    "id": 388,
+    "parentId": 387,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      387
+    ],
+    "scientificName": "Chelonia mydas",
+    "commonNames": [
+      "Penyu Hijau"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Penyu penjelajah samudra herbivora pemakan lamun laut yang bermigrasi ribuan mil menggunakan medan geomagnetik bumi.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 11
+  },
+  {
+    "id": 389,
+    "parentId": 211,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      211
+    ],
+    "scientificName": "Crocodylus porosus",
+    "commonNames": [
+      "Buaya Muara / Air Asin",
+      "Saltwater Crocodile"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Reptil hidup terbesar di muka bumi dengan kekuatan gigitan terkuat di kerajaan hewan mencapai 16.400 Newton.",
+    "imageUrl": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=600&q=80",
+    "depth": 12
+  },
+  {
+    "id": 390,
+    "parentId": 210,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210
+    ],
+    "scientificName": "Pterosauria",
+    "commonNames": [
+      "Pterosuria / Reptil Terbang Purba"
+    ],
+    "rank": "order",
+    "isClade": true,
+    "isExtinct": true,
+    "temporalRange": "Late Triassic - Late Cretaceous †",
+    "description": "Vertebrata pertama dalam sejarah bumi yang mengembangkan kemampuan terbang bertenaga mandiri dengan sayap membran kulit.",
+    "imageUrl": null,
+    "depth": 11
+  },
+  {
+    "id": 391,
+    "parentId": 390,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      390
+    ],
+    "scientificName": "Quetzalcoatlus northropi",
+    "commonNames": [
+      "Ketsalkoatlus †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Late Cretaceous (~68-66 Ma) †",
+    "description": "Hewan terbang terbesar sepanjang masa dengan bentang sayap selebar jet tempur (11 meter) dan tinggi sebanding jerapah.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 12
+  },
+  {
+    "id": 392,
+    "parentId": 240,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240
+    ],
+    "scientificName": "Spinosaurus aegyptianus",
+    "commonNames": [
+      "Spinosaurus †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Cretaceous (~99-93.5 Ma) †",
+    "description": "Dinosaurus karnivora terpanjang melebihi T-Rex dengan layar punggung raksasa dan adaptasi semi-akuatik pemangsa ikan purba.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 393,
+    "parentId": 240,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240
+    ],
+    "scientificName": "Archaeopteryx lithographica",
+    "commonNames": [
+      "Arkeopteriks / Dinosaurus Bersayap †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Late Jurassic (~150 Ma) †",
+    "description": "Fosil transisi paling termasyhur dalam sains yang membuktikan bahwa burung modern adalah dinosaurus berbulu bersayap.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 394,
+    "parentId": 221,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      221
+    ],
+    "scientificName": "Ankylosaurus magniventris",
+    "commonNames": [
+      "Ankylosaurus / Dinosaurus Baja †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Late Cretaceous (~68-66 Ma) †",
+    "description": "Tank lapis baja hidup berduri pelat osteoderm tebal dengan gada tulang penghancur di ujung ekornya.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 13
+  },
+  {
+    "id": 400,
+    "parentId": 250,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
+    "scientificName": "Palaeognathae",
+    "commonNames": [
+      "Burung Berparuh Purba / Ratite"
+    ],
+    "rank": "subclass",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Garis keturunan burung primitif bertulang dada rata tanpa lunas perlekatan otot terbang.",
+    "imageUrl": null,
+    "depth": 15
+  },
+  {
+    "id": 401,
+    "parentId": 400,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250,
+      400
+    ],
+    "scientificName": "Struthio camelus",
+    "commonNames": [
+      "Burung Unta Afrika"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Burung terbesar dan tercepat di darat berkecepatan lari 70 km/jam dengan telur berbobot 1,4 kilogram.",
+    "imageUrl": "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80",
+    "depth": 16
+  },
+  {
+    "id": 402,
+    "parentId": 250,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
+    "scientificName": "Falconiformes",
+    "commonNames": [
+      "Bangsa Alap-alap"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 15
+  },
+  {
+    "id": 403,
+    "parentId": 402,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250,
+      402
+    ],
+    "scientificName": "Falco peregrinus",
+    "commonNames": [
+      "Alap-alap Kawah / Peregrine Falcon"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Hewan tercepat di planet bumi dengan kecepatan menukik mengejar mangsa menembus lebih dari 389 km/jam.",
+    "imageUrl": "https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=600&q=80",
+    "depth": 16
+  },
+  {
+    "id": 404,
+    "parentId": 250,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
+    "scientificName": "Accipitriformes",
+    "commonNames": [
+      "Bangsa Elang & Rajawali"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 15
+  },
+  {
+    "id": 405,
+    "parentId": 404,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250,
+      404
+    ],
+    "scientificName": "Aquila chrysaetos",
+    "commonNames": [
+      "Elang Emas",
+      "Golden Eagle"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Burung pemangsa bermahkota bulu emas dengan cengkeraman cakar sekuat peluru pemburu serigala dan kelinci gunung.",
+    "imageUrl": "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?auto=format&fit=crop&w=600&q=80",
+    "depth": 16
+  },
+  {
+    "id": 406,
+    "parentId": 250,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
+    "scientificName": "Raphus cucullatus",
+    "commonNames": [
+      "Burung Dodo †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Holocene - 1662 †",
+    "description": "Burung darat tanpa terbang endemik Mauritius yang punah akibat perburuan manusia dan introduksi predator invasif.",
+    "imageUrl": "https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 407,
+    "parentId": 250,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
+    "scientificName": "Strigiformes",
+    "commonNames": [
+      "Bangsa Burung Hantu"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 15
+  },
+  {
+    "id": 408,
+    "parentId": 407,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250,
+      407
+    ],
+    "scientificName": "Tyto alba",
+    "commonNames": [
+      "Burung Hantu Serak Jawa / Barn Owl"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Predator tikus berwajah piringan hati dengan struktur bulu teredam suara yang memungkinkannya terbang tanpa desiran senyap.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 16
+  },
+  {
+    "id": 420,
+    "parentId": 121,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      121
+    ],
+    "scientificName": "Phascolarctos cinereus",
+    "commonNames": [
+      "Koala"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Marsupial arboreal berkantung herbivora spesialis yang tidur 20 jam sehari dan mencerna toksin daun eukaliptus.",
+    "imageUrl": "https://images.unsplash.com/photo-1527526029430-319f10814151?auto=format&fit=crop&w=600&q=80",
+    "depth": 13
+  },
+  {
+    "id": 421,
+    "parentId": 121,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      121
+    ],
+    "scientificName": "Thylacinus cynocephalus",
+    "commonNames": [
+      "Harimau Tasmania / Serigala Marsupial †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Pliocene - 1936 †",
+    "description": "Karnivora marsupial bergaris punggung legendaris yang punah pada 1936 di kebun binatang Hobart akibat perburuan berhadiah.",
+    "imageUrl": "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?auto=format&fit=crop&w=600&q=80",
+    "depth": 13
+  },
+  {
+    "id": 422,
+    "parentId": 111,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      111
+    ],
+    "scientificName": "Tachyglossus aculeatus",
+    "commonNames": [
+      "Ekidna Moncong Pendek"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Mamalia berduri bertelur purba dengan lidah perekat panjang pemakan rayap dan cakar penggali kuat.",
+    "imageUrl": "https://images.unsplash.com/photo-1527526029430-319f10814151?auto=format&fit=crop&w=600&q=80",
+    "depth": 12
+  },
+  {
+    "id": 430,
+    "parentId": 131,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      131
+    ],
+    "scientificName": "Loxodonta africana",
+    "commonNames": [
+      "Gajah Semak Afrika"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Mamalia darat terbesar yang masih hidup berbobot hingga 6 ton dengan gading memanjang dan kecerdasan sosial empatik tinggi.",
+    "imageUrl": "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 435,
+    "parentId": 134,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      134
+    ],
+    "scientificName": "Panthera tigris",
+    "commonNames": [
+      "Harimau",
+      "Tiger"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kucing terbesar di muka bumi bergaris loreng unik dengan kekuatan menerkam di puncak rantai makanan hutan belantara.",
+    "imageUrl": "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 436,
+    "parentId": 134,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      134
+    ],
+    "scientificName": "Acinonyx jubatus",
+    "commonNames": [
+      "Cheetah"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Pelari darat tercepat di dunia yang mampu berakselerasi dari 0 ke 100 km/jam dalam waktu kurang dari 3 detik di sabana terbuka.",
+    "imageUrl": "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 437,
+    "parentId": 137,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      137
+    ],
+    "scientificName": "Vulpes vulpes",
+    "commonNames": [
+      "Rubah Merah"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Karnivora kanid oportunis berbulu oranye lebat dengan kemampuan beradaptasi luar biasa di hutan hingga pinggiran kota metropolitan.",
+    "imageUrl": "https://images.unsplash.com/photo-1474511320723-9a56873ee018?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 438,
+    "parentId": 133,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133
+    ],
+    "scientificName": "Ursidae",
+    "commonNames": [
+      "Keluarga Beruang"
+    ],
+    "rank": "family",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 14
+  },
+  {
+    "id": 439,
+    "parentId": 438,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      438
+    ],
+    "scientificName": "Ursus maritimus",
+    "commonNames": [
+      "Beruang Kutub"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Karnivora darat terbesar kutub es utara berbulu transparan isolator panas dengan lapisan lemak tebal pemburu anjing laut.",
+    "imageUrl": "https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 440,
+    "parentId": 438,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      438
+    ],
+    "scientificName": "Ailuropoda melanoleuca",
+    "commonNames": [
+      "Panda Raksasa"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Beruang hitam-putih herbivora bambu asal pegunungan Tiongkok barat daya dengan jempol semu modifikasi tulang pergelangan.",
+    "imageUrl": "https://images.unsplash.com/photo-1527118732049-c88155f2107c?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 445,
+    "parentId": 139,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      139
+    ],
+    "scientificName": "Orcinus orca",
+    "commonNames": [
+      "Paus Pembunuh / Orca"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Predator puncak samudra tercerdas dalam famili lumba-lumba laut dengan dialek komunikasi vokal unik dan strategi berburu klan.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 446,
+    "parentId": 139,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      139
+    ],
+    "scientificName": "Physeter macrocephalus",
+    "commonNames": [
+      "Paus Sperma / Sperm Whale"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Penyelam laut dalam terdalam berotak terbesar di kerajaan hewan yang menghasilkan suara klik ekolokasi terkeras di planet bumi.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 450,
+    "parentId": 130,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130
+    ],
+    "scientificName": "Artiodactyla",
+    "commonNames": [
+      "Hewan Berkuku Genap"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 13
+  },
+  {
+    "id": 451,
+    "parentId": 450,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      450
+    ],
+    "scientificName": "Giraffa camelopardalis",
+    "commonNames": [
+      "Jerapah"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Hewan tertinggi di darat berleher 2 meter dengan sistem kardiovaskular bertekanan tinggi pemakan daun akasia berduri.",
+    "imageUrl": "https://images.unsplash.com/photo-1538099130811-745e64318258?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 452,
+    "parentId": 450,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      450
+    ],
+    "scientificName": "Hippopotamus amphibius",
+    "commonNames": [
+      "Kuda Nil"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Megafauna semi-akuatik berbobot 1,5 ton bergigi taring gading yang menyekresikan lendir merah tabir surya alami.",
+    "imageUrl": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 453,
+    "parentId": 130,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130
+    ],
+    "scientificName": "Perissodactyla",
+    "commonNames": [
+      "Hewan Berkuku Ganjil"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 13
+  },
+  {
+    "id": 454,
+    "parentId": 453,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      453
+    ],
+    "scientificName": "Equus caballus",
+    "commonNames": [
+      "Kuda"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Mamalia berkuku satu yang bermitra erat membentuk sejarah peradaban, perang, dan mobilitas manusia selama ribuan tahun.",
+    "imageUrl": "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 460,
+    "parentId": 130,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130
+    ],
+    "scientificName": "Rodentia",
+    "commonNames": [
+      "Bangsa Hewan Pengerat"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 13
+  },
+  {
+    "id": 461,
+    "parentId": 460,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      460
+    ],
+    "scientificName": "Hydrochoerus hydrochaeris",
+    "commonNames": [
+      "Kapibara",
+      "Capybara"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Pengerat terbesar di dunia asal rawa Amerika Selatan yang terkenal ramah bersahabat dengan berbagai satwa liar.",
+    "imageUrl": "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 465,
+    "parentId": 130,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130
+    ],
+    "scientificName": "Chiroptera",
+    "commonNames": [
+      "Bangsa Kelelawar"
+    ],
+    "rank": "order",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 13
+  },
+  {
+    "id": 466,
+    "parentId": 465,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      465
+    ],
+    "scientificName": "Pteropus vampyrus",
+    "commonNames": [
+      "Kalong Besar / Kelelawar Buah"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Satu-satunya mamalia dengan penerbangan sejati berkepak bertenaga sayap membran yang menjadi penyerbuk vital hutan tropis.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 470,
+    "parentId": 150,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150
+    ],
+    "scientificName": "Lemuriformes",
+    "commonNames": [
+      "Bangsa Lemur"
+    ],
+    "rank": "suborder",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Spesies organisme dalam biosfer bumi.",
+    "imageUrl": null,
+    "depth": 14
+  },
+  {
+    "id": 471,
+    "parentId": 470,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      470
+    ],
+    "scientificName": "Lemur catta",
+    "commonNames": [
+      "Lemur Ekor Cincin"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Primata berhidung basah endemik Madagaskar berekor belang hitam-putih panjang dengan organisasi sosial matrilineal kuat.",
+    "imageUrl": "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 472,
+    "parentId": 160,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      160
+    ],
+    "scientificName": "Pan paniscus",
+    "commonNames": [
+      "Bonobo / Simpanse Kerdil"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kerabat terdekat manusia bersama simpanse yang memelihara kohesi kelompok damai lewat empati dan ikatan sosial tinggi.",
+    "imageUrl": "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 473,
+    "parentId": 170,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      160,
+      170
+    ],
+    "scientificName": "Homo floresiensis",
+    "commonNames": [
+      "Manusia Flores / Hobbit †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Late Pleistocene (~100-50 ka) †",
+    "description": "Spesies hominin kerdil bertinggi 1 meter berotak kecil endemik Gua Liang Bua Flores hasil kerdil pulau (insular dwarfism).",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "depth": 16
+  },
+  {
+    "id": 474,
+    "parentId": 170,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      150,
+      160,
+      170
+    ],
+    "scientificName": "Homo erectus",
+    "commonNames": [
+      "Manusia Jawa / Homo erectus †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Pleistocene (~1.9 Ma - 110 ka) †",
+    "description": "Hominin pertama penguasa api dan perkakas batu kapak genggam Acheulean yang bermigrasi keluar dari Afrika ke Eurasia dan Sangiran Jawa.",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "depth": 16
+  },
+  {
+    "id": 500,
+    "parentId": 2,
+    "ancestorIds": [
+      1,
+      2
+    ],
+    "scientificName": "Halobacterium salinarum",
+    "commonNames": [
+      "Arkea Garam Ekstrem"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Arkea halofilik ekstrem pembuat warna ungu danau garam yang menggunakan protein bakteriorodopsin pemanen energi cahaya matahari.",
+    "imageUrl": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600&q=80",
+    "depth": 2
+  },
+  {
+    "id": 501,
+    "parentId": 2,
+    "ancestorIds": [
+      1,
+      2
+    ],
+    "scientificName": "Thermus aquaticus",
+    "commonNames": [
+      "Bakteri Mata Air Panas Taq"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Sumber enzim Taq Polimerase tahan panas yang menjadi kunci revolusi reaksi rantai polimerase (PCR) biologi molekuler modern.",
+    "imageUrl": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600&q=80",
+    "depth": 2
+  },
+  {
+    "id": 510,
+    "parentId": 313,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      313
+    ],
+    "scientificName": "Coffea arabica",
+    "commonNames": [
+      "Kopi Arabika"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Tanaman perkebunan penghasil biji kopi bernilai ekonomi tinggi asal dataran tinggi Ethiopia dengan kandungan kafein aromatik lembut.",
+    "imageUrl": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+    "depth": 6
+  },
+  {
+    "id": 511,
+    "parentId": 313,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      313
+    ],
+    "scientificName": "Theobroma cacao",
+    "commonNames": [
+      "Pohon Cokelat / Kakao"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Pohon berbuah kauliflori neotropis penghasil pasta kakao pembentuk cokelat yang dipuja peradaban Maya dan Olmec sebagai makanan para dewa.",
+    "imageUrl": "https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=600&q=80",
+    "depth": 6
+  },
+  {
+    "id": 512,
+    "parentId": 313,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      313
+    ],
+    "scientificName": "Camellia sinensis",
+    "commonNames": [
+      "Pohon Teh"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Semak daun penghasil teh hijau, teh hitam, dan oolong kaya polifenol katekin yang diminum jutaan orang di seluruh penjuru dunia.",
+    "imageUrl": "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=600&q=80",
+    "depth": 6
+  },
+  {
+    "id": 513,
+    "parentId": 311,
+    "ancestorIds": [
+      1,
+      10,
+      11,
+      12,
+      13,
+      307,
+      311
+    ],
+    "scientificName": "Vanilla planifolia",
+    "commonNames": [
+      "Vanili / Vanilla"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Satu-satunya anggrek bernilai pangan penghasil polong vanili beraroma vanilin manis menenangkan dari hutan tropis Meksiko.",
+    "imageUrl": "https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 520,
+    "parentId": 320,
+    "ancestorIds": [
+      1,
+      10,
+      20,
+      320
+    ],
+    "scientificName": "Tuber melanosporum",
+    "commonNames": [
+      "Black Truffle / Jamur Trufel Hitam"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Jamur bawah tanah mikoriza paling bernilai tinggi di dunia kuliner yang dicari menggunakan anjing pelacak terlatih di Eropa.",
+    "imageUrl": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 521,
+    "parentId": 320,
+    "ancestorIds": [
+      1,
+      10,
+      20,
+      320
+    ],
+    "scientificName": "Morchella esculenta",
+    "commonNames": [
+      "Jamur Morel Kuning"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Jamur musim semi bertudung sarang lebah eksotis dengan aroma tanah nutty khas yang sangat dihargai koki dunia.",
+    "imageUrl": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+    "depth": 4
+  },
+  {
+    "id": 530,
+    "parentId": 336,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      36,
+      335,
+      336
+    ],
+    "scientificName": "Vampyroteuthis infernalis",
+    "commonNames": [
+      "Cumi-cumi Vampir Laut Dalam"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Jurassic - Present",
+    "description": "Fosil hidup zona afotik laut dalam berselimut jubah hitam berduri sirus dengan mata biru besar dan organ fotofor bercahaya.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 7
+  },
+  {
+    "id": 531,
+    "parentId": 370,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      370
+    ],
+    "scientificName": "Pterois volitans",
+    "commonNames": [
+      "Ikan Singa / Red Lionfish"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Ikan karang hias berparas anggun dengan duri sirip beracun neurotoksik yang menyengat mangsa di terumbu karang tropis.",
+    "imageUrl": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80",
+    "depth": 8
+  },
+  {
+    "id": 540,
+    "parentId": 134,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      134
+    ],
+    "scientificName": "Panthera onca",
+    "commonNames": [
+      "Jaguar"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kucing terbesar benua Amerika dengan pola tutul roset dan rahang penghancur tempurung kura-kura serta tengkorak buaya caiman.",
+    "imageUrl": "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 541,
+    "parentId": 134,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      134
+    ],
+    "scientificName": "Puma concolor",
+    "commonNames": [
+      "Puma / Mountain Lion / Singa Gunung"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kucing soliter penjelajah dengan rentang geografis terluas di belahan bumi barat dari Yukon Kanada hingga Patagonia selatan.",
+    "imageUrl": "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 542,
+    "parentId": 137,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133,
+      137
+    ],
+    "scientificName": "Canis latrans",
+    "commonNames": [
+      "Koyot",
+      "Coyote"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Kanid cerdas berdaya adaptasi tinggi asal Amerika Utara yang hidup berdampingan di alam liar hingga wilayah perkotaan padat.",
+    "imageUrl": "https://images.unsplash.com/photo-1474511320723-9a56873ee018?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 543,
+    "parentId": 133,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      133
+    ],
+    "scientificName": "Enhydra lutris",
+    "commonNames": [
+      "Berang-berang Laut",
+      "Sea Otter"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Mamalia laut berbulu terlebat di bumi (1 juta helai per inci persegi) yang menggunakan batu sebagai alat pemecah cangkang kerang.",
+    "imageUrl": "https://images.unsplash.com/photo-1535402803947-a950d5f7ae4b?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 544,
+    "parentId": 139,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      139
+    ],
+    "scientificName": "Monodon monoceros",
+    "commonNames": [
+      "Narwhal / Paus Tanduk / Unicorn Laut"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Paus arktik bertanduk gading heliks spiral kiri sepanjang hingga 3 meter yang berfungsi sebagai organ sensorik hidrotermal sensitif.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 545,
+    "parentId": 139,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      139
+    ],
+    "scientificName": "Megaptera novaeangliae",
+    "commonNames": [
+      "Paus Bungkuk",
+      "Humpback Whale"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Paus raksasa pelompat akrobatik bersirip dada panjang selebar sepertiga tubuhnya yang menyanyikan lagu paus berirama kompleks melintasi samudra.",
+    "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 550,
+    "parentId": 131,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      131
+    ],
+    "scientificName": "Mammut americanum",
+    "commonNames": [
+      "Mastodon Amerika †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Pliocene - Late Pleistocene (~11 ka) †",
+    "description": "Kerabat gajah purba berbulu tebal bergigi kerucut pemakan dahan pohon pinus yang hidup berdampingan dengan manusia pemburu Clovis.",
+    "imageUrl": "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 551,
+    "parentId": 453,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      453
+    ],
+    "scientificName": "Coelodonta antiquitatis",
+    "commonNames": [
+      "Badak Berbulu Wol †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Pleistocene (~350-14 ka) †",
+    "description": "Badak es Eurasia bertanduk gading pipih sepanjang 1 meter yang digambar nenek moyang manusia pada lukisan gua Chauvet Prancis.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 14
+  },
+  {
+    "id": 552,
+    "parentId": 130,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130
+    ],
+    "scientificName": "Megatherium americanum",
+    "commonNames": [
+      "Kukang Tanah Raksasa †"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": true,
+    "temporalRange": "Pliocene - Holocene (~10 ka) †",
+    "description": "Megafauna herbivora Amerika Selatan seukuran gajah seberat 4 ton bercakar melengkung panjang pembongkar tajuk pohon kanopi.",
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    "depth": 13
+  },
+  {
+    "id": 560,
+    "parentId": 250,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
+    "scientificName": "Anodorhynchus hyacinthinus",
+    "commonNames": [
+      "Makaw Hiasin",
+      "Hyacinth Macaw"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Burung beo terbang terpanjang di dunia berbulu biru kobalt intens asal rawa Pantanal Brasil dengan paruh kuat pemecah kacang kelapa sawit.",
+    "imageUrl": "https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
+  },
+  {
+    "id": 561,
+    "parentId": 250,
+    "ancestorIds": [
+      1,
+      10,
+      30,
+      35,
+      50,
+      60,
+      70,
+      80,
+      90,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250
+    ],
+    "scientificName": "Calypte anna",
+    "commonNames": [
+      "Burung Kolibri Anna"
+    ],
+    "rank": "species",
+    "isClade": false,
+    "isExtinct": false,
+    "temporalRange": "Holocene - Present",
+    "description": "Penerbang helikopter alami berdegup jantung 1.200 kali per menit dengan bulu tenggorokan mahkota magenta berpendar cahaya struktural.",
+    "imageUrl": "https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=600&q=80",
+    "depth": 15
   }
 ]
-

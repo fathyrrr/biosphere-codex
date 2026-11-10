@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../models/taxon_node.dart';
+import 'taxon_image_card.dart';
 
 /// Modal lembar detail taksonomi yang estetis dan komprehensif.
-/// Menampilkan klasifikasi, status kepunahan, era geologis, deskripsi,
-/// serta navigasi cepat ke Saudara Serumpun (Sister Taxa).
+/// Menampilkan visual gambar takson, klasifikasi, status kepunahan,
+/// era geologis, deskripsi ilmiah, serta navigasi cepat ke Saudara Serumpun.
 class TaxonDetailSheet extends StatelessWidget {
   final TaxonNode node;
   final ValueChanged<TaxonNode> onNodeSelected;
@@ -26,15 +27,18 @@ class TaxonDetailSheet extends StatelessWidget {
     final parent = node.parent;
 
     return Container(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.85,
+      ),
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
       decoration: const BoxDecoration(
         color: Color(0xFF0F172A),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black54,
-            blurRadius: 20,
-            offset: Offset(0, -5),
+            color: Colors.black87,
+            blurRadius: 24,
+            offset: Offset(0, -6),
           ),
         ],
       ),
@@ -46,17 +50,26 @@ class TaxonDetailSheet extends StatelessWidget {
             // Handle bar drag
             Center(
               child: Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 16),
+                width: 44,
+                height: 4.5,
+                margin: const EdgeInsets.only(bottom: 14),
                 decoration: BoxDecoration(
                   color: const Color(0xFF334155),
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(3),
                 ),
               ),
             ),
 
-            // Badges row: Rank, Extinct, Clade
+            // 1. Gambar Visual Takson (Visual Illustration / Nature Photo)
+            TaxonImageCard(
+              node: node,
+              height: 160,
+              borderRadius: BorderRadius.circular(14),
+            ),
+
+            const SizedBox(height: 14),
+
+            // 2. Badges row: Rank, Clade, Extinction
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -138,9 +151,9 @@ class TaxonDetailSheet extends StatelessWidget {
 
             const SizedBox(height: 12),
 
-            // Scientific Name
+            // 3. Nama Ilmiah & Nama Umum
             Text(
-              node.scientificName,
+              node.isExtinct ? '† ${node.scientificName}' : node.scientificName,
               style: TextStyle(
                 color: const Color(0xFFF8FAFC),
                 fontSize: 22,
@@ -151,7 +164,6 @@ class TaxonDetailSheet extends StatelessWidget {
               ),
             ),
 
-            // Common Name
             if (node.commonName != null) ...[
               const SizedBox(height: 2),
               Text(
@@ -164,7 +176,7 @@ class TaxonDetailSheet extends StatelessWidget {
               ),
             ],
 
-            // Temporal Range
+            // Rentang Era Geologis
             if (node.temporalRange != null) ...[
               const SizedBox(height: 8),
               Row(
@@ -183,9 +195,9 @@ class TaxonDetailSheet extends StatelessWidget {
               ),
             ],
 
-            // Description
+            // Deskripsi Biologi
             if (node.description != null) ...[
-              const SizedBox(height: 14),
+              const SizedBox(height: 12),
               Text(
                 node.description!,
                 style: const TextStyle(
@@ -196,12 +208,12 @@ class TaxonDetailSheet extends StatelessWidget {
               ),
             ],
 
-            const SizedBox(height: 18),
+            const SizedBox(height: 16),
             const Divider(color: Color(0xFF1E293B)),
 
-            // Parent Taxon
+            // Leluhur Langsung (Parent)
             if (parent != null) ...[
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               const Text(
                 'Leluhur Langsung (Parent):',
                 style: TextStyle(
@@ -229,9 +241,9 @@ class TaxonDetailSheet extends StatelessWidget {
               ),
             ],
 
-            // Sister Taxa (Saudara Serumpun)
+            // Saudara Serumpun (Sister Taxa)
             if (siblings.isNotEmpty) ...[
-              const SizedBox(height: 14),
+              const SizedBox(height: 12),
               Text(
                 'Saudara Serumpun / Sister Taxa (${siblings.length}):',
                 style: const TextStyle(
@@ -260,7 +272,7 @@ class TaxonDetailSheet extends StatelessWidget {
                       sibling.scientificName,
                       style: TextStyle(
                         color: const Color(0xFFE2E8F0),
-                        fontSize: 11,
+                        fontSize: 11.5,
                         fontStyle: (sibling.rank.displayName == 'Species')
                             ? FontStyle.italic
                             : FontStyle.normal,
@@ -272,7 +284,7 @@ class TaxonDetailSheet extends StatelessWidget {
               ),
             ],
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 18),
 
             // Action Buttons
             Row(
@@ -285,23 +297,10 @@ class TaxonDetailSheet extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
-                    onPressed: onFocusCamera,
-                    icon: const Icon(Icons.filter_center_focus, size: 18),
-                    label: const Text('Fokus Kamera', style: TextStyle(fontWeight: FontWeight.bold)),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: const Color(0xFF38BDF8),
-                      side: const BorderSide(color: Color(0xFF0284C7)),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    ),
                     onPressed: onOpenLCA,
                     icon: const Icon(Icons.hub_outlined, size: 18),
-                    label: const Text('Uji LCA', style: TextStyle(fontWeight: FontWeight.bold)),
+                    label: const Text('Uji Divergensi LCA',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
                 if (node.children.isNotEmpty) ...[
@@ -324,4 +323,3 @@ class TaxonDetailSheet extends StatelessWidget {
     );
   }
 }
-

@@ -68,9 +68,9 @@ void main() {
       expect(human, isNotNull);
 
       final siblings = human!.siblings;
-      expect(siblings.length, equals(1));
-      expect(siblings.first.scientificName, equals('Homo neanderthalensis'));
-      expect(siblings.first.isExtinct, isTrue); // Neanderthal punah (†)
+      expect(siblings.length, greaterThanOrEqualTo(1));
+      final neanderthal = siblings.firstWhere((s) => s.scientificName == 'Homo neanderthalensis');
+      expect(neanderthal.isExtinct, isTrue); // Neanderthal punah (†)
     });
 
     test('Perhitungan Lowest Common Ancestor (LCA) antara Manusia dan T-Rex', () {

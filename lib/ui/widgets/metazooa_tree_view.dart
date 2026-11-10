@@ -7,12 +7,13 @@ import '../../models/taxon_rank.dart';
 class _MetazooaNodeLayout {
   final TaxonNode node;
   final Offset position;
-  final bool isTrunk; // True jika berada di batang utama, False jika cabang samping (offshoot)
+  final bool isTrunk; // True jika batang utama, False jika cabang samping (offshoot)
   final Color nodeColor;
   final Color textColor;
   final Color borderColor;
   final String label;
   final String? subLabel;
+  final String rankName;
   final bool isTarget;
 
   const _MetazooaNodeLayout({
@@ -24,11 +25,12 @@ class _MetazooaNodeLayout {
     required this.borderColor,
     required this.label,
     this.subLabel,
+    required this.rankName,
     this.isTarget = false,
   });
 }
 
-/// Model untuk garis cabang kurva organik (Bezier Curve)
+/// Model untuk garis cabang kurva organik (Cubic Bezier Curve)
 class _MetazooaBranchCurve {
   final Offset start;
   final Offset end;
@@ -47,12 +49,25 @@ class _MetazooaBranchCurve {
   });
 }
 
-/// Tampilan Pohon Filogenetik ala Metazooa:
-/// - Top-Down (Mengalir dari Leluhur Tertinggi di atas ke Takson Spesifik di bawah)
-/// - Batang Utama (Trunk) dengan warna solid bergradasi
-/// - Cabang-cabang samping (Offshoots / Sister Clades) melengkung halus dengan Kurva Bezier organik
-/// - Node berbentuk Kapsul / Pill modern yang bersih dan sangat informatif
-/// - Bebas freeze & bebas lag, interaktif dengan zoom & pan
+/// Model penanda level taksonomi di sisi kiri
+class _LevelRankGuide {
+  final double y;
+  final String rankName;
+  final Color color;
+
+  const _LevelRankGuide({
+    required this.y,
+    required this.rankName,
+    required this.color,
+  });
+}
+
+/// Tampilan Pohon Filogenetik ala Metazooa yang Diperbarui:
+/// - Menampilkan SELURUH taksa kerabat (tanpa ringkasan "+X lainnya")
+/// - Top-Down (Mengalir dari Leluhur Tertinggi di atas ke Takson Target di bawah)
+/// - Tangga Peringkat Taksonomi (Rank Ladder) di sebelah kiri
+/// - Tombol Zoom In, Zoom Out, dan Center Target yang halus
+/// - Kurva Bezier organik dengan Kapsul Pill modern bergradasi
 class MetazooaTreeView extends StatefulWidget {
   final TaxonNode focusNode;
   final ValueChanged<TaxonNode> onNodeSelected;
@@ -69,44 +84,79 @@ class MetazooaTreeView extends StatefulWidget {
   State<MetazooaTreeView> createState() => _MetazooaTreeViewState();
 }
 
-class _MetazooaTreeViewState extends State<MetazooaTreeView> {
+class _MetazooaTreeViewState extends State<MetazooaTreeView>
+    with SingleTickerProviderStateMixin {
   final TransformationController _transformController = TransformationController();
+  late AnimationController _animController;
+  Animation<Matrix4>? _zoomAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    )..addListener(() {
+        if (_zoomAnimation != null) {
+          _transformController.value = _zoomAnimation!.value;
+        }
+      });
+  }
 
   @override
   void didUpdateWidget(covariant MetazooaTreeView oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.focusNode.id != widget.focusNode.id) {
-      // Saat fokus takson berganti, kembalikan posisi awal secara halus
-      _resetView();
+      _animateToMatrix(Matrix4.identity());
     }
-  }
-
-  void _resetView() {
-    _transformController.value = Matrix4.identity();
   }
 
   @override
   void dispose() {
+    _animController.dispose();
     _transformController.dispose();
     super.dispose();
   }
 
-  /// Warna batang bertahap ala Metazooa (dari Merah Bata -> Oranye -> Amber -> Hijau Daun -> Hijau Zamrud)
+  void _animateToMatrix(Matrix4 target) {
+    _zoomAnimation = Matrix4Tween(
+      begin: _transformController.value,
+      end: target,
+    ).animate(CurvedAnimation(
+      parent: _animController,
+      curve: Curves.easeInOutCubic,
+    ));
+    _animController.forward(from: 0.0);
+  }
+
+  void _zoomIn() {
+    final current = _transformController.value;
+    final target = current.clone()..scale(1.25, 1.25, 1.0);
+    _animateToMatrix(target);
+  }
+
+  void _zoomOut() {
+    final current = _transformController.value;
+    final target = current.clone()..scale(0.8, 0.8, 1.0);
+    _animateToMatrix(target);
+  }
+
+  void _resetZoom() {
+    _animateToMatrix(Matrix4.identity());
+  }
+
+  /// Warna batang bertahap ala Metazooa
   Color _getMetazooaColor(int depthIndex, int totalDepth, TaxonRank rank) {
     if (totalDepth <= 1) return const Color(0xFF10B981);
     final ratio = depthIndex / (totalDepth - 1);
 
     if (ratio < 0.25) {
-      // Crimson / Burgundy untuk Kingdom / Domain atas
       return Color.lerp(const Color(0xFF991B1B), const Color(0xFFC2410C), ratio * 4)!;
     } else if (ratio < 0.5) {
-      // Burnt Orange ke Amber Emas
       return Color.lerp(const Color(0xFFC2410C), const Color(0xFFD97706), (ratio - 0.25) * 4)!;
     } else if (ratio < 0.75) {
-      // Amber ke Olive Green
       return Color.lerp(const Color(0xFFD97706), const Color(0xFF65A30D), (ratio - 0.5) * 4)!;
     } else {
-      // Olive Green ke Emerald Green (Target)
       return Color.lerp(const Color(0xFF65A30D), const Color(0xFF059669), (ratio - 0.75) * 4)!;
     }
   }
@@ -115,38 +165,55 @@ class _MetazooaTreeViewState extends State<MetazooaTreeView> {
   Widget build(BuildContext context) {
     final lineage = widget.focusNode.lineage;
 
-    // Filter silsilah: hindari terlalu banyak tingkat mikro unranked jika panjang,
-    // tapi pertahankan titik percabangan penting.
-    final trunkNodes = <TaxonNode>[];
-    for (final n in lineage) {
-      // Selalu sertakan root, target, dan node dengan nama atau saudara
-      trunkNodes.add(n);
-    }
+    // Filter silsilah batang utama
+    final trunkNodes = List<TaxonNode>.from(lineage);
+    final int totalSteps = trunkNodes.length;
 
-    // Hitung posisi koordinat untuk seluruh batang utama & cabang samping
-    const double canvasWidth = 1400.0;
+    const double canvasWidth = 1600.0;
     const double centerX = canvasWidth / 2.0;
-    const double startY = 70.0;
-    const double levelGap = 115.0;
-    const double sideOffset = 260.0;
+    const double startY = 80.0;
+    const double sideBaseOffset = 260.0;
 
     final nodeLayouts = <_MetazooaNodeLayout>[];
     final branchCurves = <_MetazooaBranchCurve>[];
+    final rankGuides = <_LevelRankGuide>[];
 
-    final int totalSteps = trunkNodes.length;
+    // Hitung posisi vertikal dinamis berdasarkan jumlah saudara serumpun di setiap level
+    final levelYPositions = <double>[];
+    double currentY = startY;
 
-    // 1. Plot Batang Utama (Trunk Nodes)
+    for (int i = 0; i < totalSteps; i++) {
+      levelYPositions.add(currentY);
+      final siblingCount = trunkNodes[i].siblings.length;
+      final siblingsPerSide = (siblingCount / 2).ceil();
+      // Berikan ruang vertikal ekstra jika saudara serumpun banyak agar tidak tumpang tindih
+      final dynamicGap = siblingCount > 2
+          ? 120.0 + (siblingsPerSide * 52.0)
+          : (siblingCount > 0 ? 120.0 : 95.0);
+      currentY += dynamicGap;
+    }
+
+    final double totalHeight = currentY + 140.0;
+
+    // 1. Plot Batang Utama (Trunk Nodes) & Cabang Samping (Offshoots)
     for (int i = 0; i < totalSteps; i++) {
       final node = trunkNodes[i];
       final isTarget = i == totalSteps - 1;
       final nodeColor = _getMetazooaColor(i, totalSteps, node.rank);
+      final posY = levelYPositions[i];
 
-      // Sedikit lengkungan organik pada batang tengah (zig-zag halus ala Metazooa)
+      // Zig-zag halus pada batang utama ala Metazooa
       final double xOffset = (i == 0 || isTarget)
           ? 0.0
-          : (i % 2 == 1 ? 35.0 : -35.0);
+          : (i % 2 == 1 ? 30.0 : -30.0);
       final double posX = centerX + xOffset;
-      final double posY = startY + (i * levelGap);
+
+      // Panduan Peringkat (Rank Guide) di sisi kiri
+      rankGuides.add(_LevelRankGuide(
+        y: posY,
+        rankName: node.rank.displayName.toUpperCase(),
+        color: node.rank.color,
+      ));
 
       nodeLayouts.add(_MetazooaNodeLayout(
         node: node,
@@ -154,13 +221,14 @@ class _MetazooaTreeViewState extends State<MetazooaTreeView> {
         isTrunk: true,
         nodeColor: nodeColor,
         textColor: Colors.white,
-        borderColor: nodeColor.withOpacity(0.8),
+        borderColor: nodeColor.withOpacity(0.85),
         label: node.scientificName,
         subLabel: node.commonName,
+        rankName: node.rank.displayName,
         isTarget: isTarget,
       ));
 
-      // Hubungkan garis kurva ke node batang sebelumnya
+      // Garis kurva penghubung batang utama
       if (i > 0) {
         final prevLayout = nodeLayouts.firstWhere((n) => n.node.id == trunkNodes[i - 1].id);
         final prevColor = _getMetazooaColor(i - 1, totalSteps, trunkNodes[i - 1].rank);
@@ -175,75 +243,101 @@ class _MetazooaTreeViewState extends State<MetazooaTreeView> {
         ));
       }
 
-      // 2. Plot Cabang Samping (Offshoot / Sister Taxa) yang memisah di level ini
+      // 2. Plot SEMUA Cabang Samping (Sister Taxa)
       final siblings = node.siblings;
       if (siblings.isNotEmpty) {
-        // Tampilkan 1-2 saudara serumpun paling ikonik di sisi kiri atau kanan
-        final sideDirection = (i % 2 == 1) ? -1.0 : 1.0;
-        final offshootNode = siblings.first;
+        // Bagi seluruh saudara serumpun ke sisi kiri dan kanan secara seimbang
+        final leftSiblings = <TaxonNode>[];
+        final rightSiblings = <TaxonNode>[];
 
-        final offshootX = posX + (sideDirection * sideOffset);
-        final offshootY = posY + 35.0;
+        for (int s = 0; s < siblings.length; s++) {
+          if (s % 2 == 0) {
+            // Sisi bergantian berdasarkan level
+            if (i % 2 == 1) {
+              leftSiblings.add(siblings[s]);
+            } else {
+              rightSiblings.add(siblings[s]);
+            }
+          } else {
+            if (i % 2 == 1) {
+              rightSiblings.add(siblings[s]);
+            } else {
+              leftSiblings.add(siblings[s]);
+            }
+          }
+        }
 
-        nodeLayouts.add(_MetazooaNodeLayout(
-          node: offshootNode,
-          position: Offset(offshootX, offshootY),
-          isTrunk: false,
-          nodeColor: const Color(0xFF1E293B),
-          textColor: const Color(0xFFE2E8F0),
-          borderColor: offshootNode.isExtinct
-              ? const Color(0xFFEF4444)
-              : offshootNode.rank.color.withOpacity(0.6),
-          label: offshootNode.isExtinct
-              ? '† ${offshootNode.scientificName}'
-              : offshootNode.scientificName,
-          subLabel: offshootNode.commonName ?? offshootNode.rank.displayName,
-          isTarget: false,
-        ));
-
-        // Kurva Bezier halus dari batang ke cabang samping
-        branchCurves.add(_MetazooaBranchCurve(
-          start: Offset(posX, posY),
-          end: Offset(offshootX, offshootY),
-          startColor: nodeColor.withOpacity(0.9),
-          endColor: offshootNode.isExtinct
-              ? const Color(0xFFEF4444).withOpacity(0.8)
-              : offshootNode.rank.color.withOpacity(0.8),
-          strokeWidth: 2.2,
-          isTrunk: false,
-        ));
-
-        // Jika ada lebih dari 1 saudara, tampilkan badge "+X lainnya" di sisi berlawanan
-        if (siblings.length > 1) {
-          final extraX = posX - (sideDirection * (sideOffset * 0.75));
-          final extraY = posY + 25.0;
-          final extraCount = siblings.length - 1;
+        // Plot saudara di sisi kiri
+        for (int l = 0; l < leftSiblings.length; l++) {
+          final sib = leftSiblings[l];
+          final sibX = posX - sideBaseOffset - (l * 40.0);
+          final sibY = posY + (l * 56.0) - ((leftSiblings.length - 1) * 20.0);
 
           nodeLayouts.add(_MetazooaNodeLayout(
-            node: siblings[1],
-            position: Offset(extraX, extraY),
+            node: sib,
+            position: Offset(sibX, sibY),
             isTrunk: false,
             nodeColor: const Color(0xFF0F172A),
-            textColor: const Color(0xFF94A3B8),
-            borderColor: const Color(0xFF334155),
-            label: '+ $extraCount taksa kerabat',
-            subLabel: 'Klik untuk beralih',
+            textColor: const Color(0xFFE2E8F0),
+            borderColor: sib.isExtinct
+                ? const Color(0xFFEF4444)
+                : sib.rank.color.withOpacity(0.65),
+            label: sib.isExtinct
+                ? '† ${sib.scientificName}'
+                : sib.scientificName,
+            subLabel: sib.commonName ?? sib.rank.displayName,
+            rankName: sib.rank.displayName,
             isTarget: false,
           ));
 
           branchCurves.add(_MetazooaBranchCurve(
             start: Offset(posX, posY),
-            end: Offset(extraX, extraY),
-            startColor: nodeColor.withOpacity(0.4),
-            endColor: const Color(0xFF475569),
-            strokeWidth: 1.5,
+            end: Offset(sibX, sibY),
+            startColor: nodeColor.withOpacity(0.85),
+            endColor: sib.isExtinct
+                ? const Color(0xFFEF4444).withOpacity(0.7)
+                : sib.rank.color.withOpacity(0.7),
+            strokeWidth: 2.2,
+            isTrunk: false,
+          ));
+        }
+
+        // Plot saudara di sisi kanan
+        for (int r = 0; r < rightSiblings.length; r++) {
+          final sib = rightSiblings[r];
+          final sibX = posX + sideBaseOffset + (r * 40.0);
+          final sibY = posY + (r * 56.0) - ((rightSiblings.length - 1) * 20.0);
+
+          nodeLayouts.add(_MetazooaNodeLayout(
+            node: sib,
+            position: Offset(sibX, sibY),
+            isTrunk: false,
+            nodeColor: const Color(0xFF0F172A),
+            textColor: const Color(0xFFE2E8F0),
+            borderColor: sib.isExtinct
+                ? const Color(0xFFEF4444)
+                : sib.rank.color.withOpacity(0.65),
+            label: sib.isExtinct
+                ? '† ${sib.scientificName}'
+                : sib.scientificName,
+            subLabel: sib.commonName ?? sib.rank.displayName,
+            rankName: sib.rank.displayName,
+            isTarget: false,
+          ));
+
+          branchCurves.add(_MetazooaBranchCurve(
+            start: Offset(posX, posY),
+            end: Offset(sibX, sibY),
+            startColor: nodeColor.withOpacity(0.85),
+            endColor: sib.isExtinct
+                ? const Color(0xFFEF4444).withOpacity(0.7)
+                : sib.rank.color.withOpacity(0.7),
+            strokeWidth: 2.2,
             isTrunk: false,
           ));
         }
       }
     }
-
-    final double totalHeight = startY + (totalSteps * levelGap) + 120.0;
 
     return Container(
       color: const Color(0xFF090D16),
@@ -260,14 +354,39 @@ class _MetazooaTreeViewState extends State<MetazooaTreeView> {
           InteractiveViewer(
             transformationController: _transformController,
             constrained: false,
-            boundaryMargin: const EdgeInsets.symmetric(horizontal: 500, vertical: 200),
-            minScale: 0.35,
-            maxScale: 2.2,
+            boundaryMargin: const EdgeInsets.symmetric(horizontal: 600, vertical: 300),
+            minScale: 0.25,
+            maxScale: 2.5,
             child: SizedBox(
               width: canvasWidth,
               height: totalHeight,
               child: Stack(
                 children: [
+                  // Layer 0: Tangga Peringkat Taksonomi (Rank Ladder) di sisi kiri
+                  ...rankGuides.map((guide) {
+                    return Positioned(
+                      left: 40,
+                      top: guide.y - 12,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: guide.color.withOpacity(0.12),
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: guide.color.withOpacity(0.4)),
+                        ),
+                        child: Text(
+                          guide.rankName,
+                          style: GoogleFonts.spaceMono(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: guide.color,
+                            letterSpacing: 1.0,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+
                   // Layer 1: Garis Cabang Kurva Organik (Bezier Curves)
                   Positioned.fill(
                     child: CustomPaint(
@@ -279,7 +398,7 @@ class _MetazooaTreeViewState extends State<MetazooaTreeView> {
                   ...nodeLayouts.map((layout) {
                     return Positioned(
                       left: layout.position.dx - 110,
-                      top: layout.position.dy - 22,
+                      top: layout.position.dy - 24,
                       child: _MetazooaPillCard(
                         layout: layout,
                         onTap: () => widget.onNodeSelected(layout.node),
@@ -291,42 +410,78 @@ class _MetazooaTreeViewState extends State<MetazooaTreeView> {
             ),
           ),
 
-          // Floating Controls di Sudut Kanan Bawah
+          // Floating Zoom & View Controls di Sudut Kanan Bawah
           Positioned(
             right: 20,
             bottom: 20,
             child: Container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                color: const Color(0xFF0F172A).withOpacity(0.9),
-                borderRadius: BorderRadius.circular(12),
+                color: const Color(0xFF0F172A).withOpacity(0.95),
+                borderRadius: BorderRadius.circular(14),
                 border: Border.all(color: const Color(0xFF1E293B)),
                 boxShadow: const [
-                  BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(0, 4)),
+                  BoxShadow(color: Colors.black54, blurRadius: 14, offset: Offset(0, 4)),
                 ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _ZoomButton(
+                    icon: Icons.add_rounded,
+                    tooltip: 'Perbesar (Zoom In)',
+                    onTap: _zoomIn,
+                  ),
+                  const SizedBox(height: 4),
+                  _ZoomButton(
+                    icon: Icons.remove_rounded,
+                    tooltip: 'Perkecil (Zoom Out)',
+                    onTap: _zoomOut,
+                  ),
+                  const SizedBox(height: 4),
+                  _ZoomButton(
+                    icon: Icons.fit_screen_rounded,
+                    tooltip: 'Reset Tampilan',
+                    onTap: _resetZoom,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Label Info Target di Kiri Bawah
+          Positioned(
+            left: 20,
+            bottom: 20,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0F172A).withOpacity(0.95),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: const Color(0xFF1E293B)),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.center_focus_strong, color: Color(0xFF38BDF8), size: 20),
-                    tooltip: 'Reset Sudut Pandang',
-                    onPressed: _resetView,
-                  ),
-                  const SizedBox(width: 4),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1E293B),
-                      borderRadius: BorderRadius.circular(8),
+                    width: 8,
+                    height: 8,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF10B981),
+                      shape: BoxShape.circle,
                     ),
-                    child: Text(
-                      'Pohon Silsilah ${widget.focusNode.scientificName}',
-                      style: GoogleFonts.inter(
-                        fontSize: 11.5,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xFFCBD5E1),
-                      ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Target: ${widget.focusNode.scientificName}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFFF1F5F9),
+                      fontStyle: (widget.focusNode.rank.displayName == 'Species' ||
+                              widget.focusNode.rank.displayName == 'Genus')
+                          ? FontStyle.italic
+                          : FontStyle.normal,
                     ),
                   ),
                 ],
@@ -334,6 +489,38 @@ class _MetazooaTreeViewState extends State<MetazooaTreeView> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ZoomButton extends StatelessWidget {
+  final IconData icon;
+  final String tooltip;
+  final VoidCallback onTap;
+
+  const _ZoomButton({
+    required this.icon,
+    required this.tooltip,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: tooltip,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          width: 34,
+          height: 34,
+          decoration: BoxDecoration(
+            color: const Color(0xFF1E293B),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(icon, color: const Color(0xFF94A3B8), size: 18),
+        ),
       ),
     );
   }
@@ -368,9 +555,6 @@ class _MetazooaBranchPainter extends CustomPainter {
       final path = Path();
       path.moveTo(branch.start.dx, branch.start.dy);
 
-      // Kurva Cubic Bezier halus (Metazooa style)
-      // Titik kontrol 1: turun dari start.dy
-      // Titik kontrol 2: naik dari end.dy
       final double deltaY = branch.end.dy - branch.start.dy;
       final double cp1Y = branch.start.dy + (deltaY * 0.55);
       final double cp2Y = branch.end.dy - (deltaY * 0.25);
@@ -384,7 +568,7 @@ class _MetazooaBranchPainter extends CustomPainter {
         branch.end.dy,
       );
 
-      // Gambar glow tipis untuk batang utama
+      // Gambar glow halus untuk batang utama
       if (branch.isTrunk) {
         final glowPaint = Paint()
           ..isAntiAlias = true
@@ -423,7 +607,7 @@ class _MetazooaPillCard extends StatelessWidget {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           width: 220,
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
             color: isTrunk ? layout.nodeColor : layout.nodeColor,
             borderRadius: BorderRadius.circular(24),
@@ -439,7 +623,7 @@ class _MetazooaPillCard extends StatelessWidget {
                     ? const Color(0xFF10B981).withOpacity(0.4)
                     : isTrunk
                         ? layout.nodeColor.withOpacity(0.3)
-                        : Colors.black38,
+                        : Colors.black45,
                 blurRadius: isTarget ? 16 : 8,
                 offset: const Offset(0, 3),
               ),
@@ -449,6 +633,36 @@ class _MetazooaPillCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Badge Peringkat kecil di dalam kapsul
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    layout.rankName.toUpperCase(),
+                    style: GoogleFonts.spaceMono(
+                      fontSize: 8.5,
+                      fontWeight: FontWeight.bold,
+                      color: isTrunk
+                          ? Colors.white.withOpacity(0.75)
+                          : layout.node.rank.color,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
+                  if (layout.node.isExtinct) ...[
+                    const SizedBox(width: 4),
+                    const Text(
+                      '†',
+                      style: TextStyle(
+                        fontSize: 9,
+                        color: Color(0xFFEF4444),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+              const SizedBox(height: 2),
+
               // Label Nama Ilmiah
               Text(
                 layout.label,
@@ -467,9 +681,9 @@ class _MetazooaPillCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
 
-              // Sub-label (Nama umum atau peringkat)
+              // Sub-label (Nama umum)
               if (layout.subLabel != null && layout.subLabel!.isNotEmpty) ...[
-                const SizedBox(height: 1.5),
+                const SizedBox(height: 1),
                 Text(
                   layout.subLabel!,
                   textAlign: TextAlign.center,
@@ -497,7 +711,7 @@ class _SubtleGridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF1E293B).withOpacity(0.15)
+      ..color = const Color(0xFF1E293B).withOpacity(0.12)
       ..strokeWidth = 0.8;
 
     const step = 40.0;
