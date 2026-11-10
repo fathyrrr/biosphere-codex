@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../database/taxonomy_repository.dart';
 import '../../engine/n_ary_tree.dart';
 import '../../models/taxon_node.dart';
+import '../widgets/metazooa_tree_view.dart';
 import '../widgets/clean_tree_view.dart';
 import '../widgets/clade_deck_view.dart';
 import '../widgets/lineage_breadcrumb.dart';
@@ -10,11 +11,12 @@ import '../widgets/search_sheet.dart';
 import '../widgets/lca_calculator_dialog.dart';
 import '../widgets/taxon_detail_sheet.dart';
 
-enum ExplorerViewMode { tree, deck }
+enum ExplorerViewMode { metazooa, tree, deck }
 
-/// Layar Utama Biosphere Codex Explorer yang dirombak total:
-/// Bersih, berstruktur rapi, cepat, responsif, dan menyajikan hierarki
-/// taksonomi biologi tanpa membuat pengguna kewalahan atau freeze.
+/// Layar Utama Biosphere Codex Explorer yang menghadirkan:
+/// - Pohon Filogenetik ala Metazooa (Top-Down, Kurva Bezier Organik, Node Kapsul)
+/// - Navigasi Hirarki & Katalog Taksonomi
+/// - Pencarian Instan (FTS) & Kalkulator Divergensi LCA
 class CodexExplorerScreen extends StatefulWidget {
   final VoidCallback? onBackToHero;
 
@@ -31,7 +33,7 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
   String _loadingMessage = 'Memuat basis data taksonomi...';
   TaxonNode? _selectedNode;
   final Set<int> _highlightedNodeIds = {};
-  ExplorerViewMode _viewMode = ExplorerViewMode.tree;
+  ExplorerViewMode _viewMode = ExplorerViewMode.metazooa; // Default ke Pohon Metazooa!
 
   @override
   void initState() {
@@ -44,15 +46,13 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
       setState(() => _loadingMessage = 'Menginisialisasi basis data...');
       await TaxonomyRepository.instance.init();
 
-      setState(() => _loadingMessage = 'Membangun hierarki pohon kehidupan...');
+      setState(() => _loadingMessage = 'Membangun silsilah kehidupan...');
       final nodes = await TaxonomyRepository.instance.getAllTaxaNodes();
 
       _treeEngine.buildFromNodes(nodes);
+      _treeEngine.expandToDepth(3);
 
-      // Buka level awal (Domain & Kingdom) agar pengguna langsung melihat percabangan awal
-      _treeEngine.expandToDepth(2);
-
-      // Default fokus ke Homo sapiens sebagai permulaan familiar
+      // Default fokus ke Homo sapiens
       final human = _treeEngine.getNodeById(172);
       if (human != null) {
         _selectedNode = human;
@@ -77,9 +77,9 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
       _treeEngine.expandTo(node);
     });
 
-    // Pada layar ponsel (narrow), tampilkan bottom sheet detail
+    // Di layar sempit (ponsel), buka detail sheet jika sedang di mode Metazooa atau Tree
     final isWide = MediaQuery.of(context).size.width >= 960;
-    if (!isWide && _viewMode == ExplorerViewMode.tree) {
+    if (!isWide && _viewMode != ExplorerViewMode.deck) {
       _showDetailSheet(node);
     }
   }
@@ -145,7 +145,7 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
             for (final n in divergence.nodeB.lineage) {
               _highlightedNodeIds.add(n.id);
             }
-            _selectedNode = divergence.lca;
+            _selectedNode = divergence.nodeA; // Fokus ke organisme A
             _treeEngine.expandTo(divergence.nodeA);
             _treeEngine.expandTo(divergence.nodeB);
           });
@@ -153,15 +153,14 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
             SnackBar(
               backgroundColor: const Color(0xFF0F2E23),
               content: Text(
-                'LCA Ditemukan: ${divergence.lca.scientificName} (${divergence.totalTaxonomicDistance} langkah divergensi)',
+                'LCA (${divergence.lca.scientificName}): Divergensi ${divergence.totalTaxonomicDistance} langkah.',
                 style: const TextStyle(
                   color: Color(0xFF34D399),
                   fontWeight: FontWeight.bold,
                 ),
               ),
               behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               margin: const EdgeInsets.all(16),
             ),
           );
@@ -189,7 +188,10 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
             onNodeSelected: _onNodeSelected,
           ),
 
-          // 2. Area Konten Utama (Responsive Dual-View)
+          // 2. Bar Pintas Spesies Populer (Quick Showcase Chips)
+          _buildQuickTaxonBar(),
+
+          // 3. Area Konten Utama
           Expanded(
             child: isWide ? _buildWideLayout() : _buildNarrowLayout(),
           ),
@@ -217,11 +219,9 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
             decoration: BoxDecoration(
               color: const Color(0xFF10B981).withOpacity(0.12),
               borderRadius: BorderRadius.circular(8),
-              border:
-                  Border.all(color: const Color(0xFF10B981).withOpacity(0.4)),
+              border: Border.all(color: const Color(0xFF10B981).withOpacity(0.4)),
             ),
-            child: const Icon(Icons.account_tree_outlined,
-                color: Color(0xFF10B981), size: 18),
+            child: const Icon(Icons.account_tree_outlined, color: Color(0xFF10B981), size: 18),
           ),
           const SizedBox(width: 12),
           Column(
@@ -230,7 +230,7 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
               Text(
                 'BIOSPHERE CODEX',
                 style: GoogleFonts.spaceMono(
-                  fontSize: 14,
+                  fontSize: 13.5,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.2,
                   color: const Color(0xFFF8FAFC),
@@ -248,9 +248,9 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
         ],
       ),
       actions: [
-        // Mode Switcher: Pohon vs Katalog Deck
+        // Mode Switcher: Pohon Metazooa vs Daftar Bertingkat vs Katalog
         Container(
-          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+          margin: const EdgeInsets.symmetric(vertical: 9, horizontal: 8),
           padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(
             color: const Color(0xFF1E293B),
@@ -260,8 +260,14 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               _ModeButton(
-                icon: Icons.account_tree_rounded,
-                label: 'Pohon',
+                icon: Icons.alt_route_rounded,
+                label: 'Metazooa',
+                isActive: _viewMode == ExplorerViewMode.metazooa,
+                onTap: () => setState(() => _viewMode = ExplorerViewMode.metazooa),
+              ),
+              _ModeButton(
+                icon: Icons.format_list_bulleted_rounded,
+                label: 'Daftar',
                 isActive: _viewMode == ExplorerViewMode.tree,
                 onTap: () => setState(() => _viewMode = ExplorerViewMode.tree),
               ),
@@ -282,37 +288,11 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
           onPressed: _openSearch,
         ),
 
-        // Kalkulator Divergensi LCA
+        // Kalkulator Kekerabatan LCA
         IconButton(
           icon: const Icon(Icons.hub_outlined, color: Color(0xFF10B981)),
           tooltip: 'Kalkulator Kekerabatan LCA',
           onPressed: () => _openLCADialog(_selectedNode),
-        ),
-
-        // Menu Aksi Tambahan
-        PopupMenuButton<String>(
-          icon: const Icon(Icons.more_vert, color: Color(0xFF94A3B8)),
-          color: const Color(0xFF1E293B),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          onSelected: (val) {
-            if (val == 'expand_all') {
-              setState(() => _treeEngine.expandToDepth(20));
-            } else if (val == 'collapse_all') {
-              setState(() => _treeEngine.expandToDepth(2));
-            } else if (val == 'focus_human') {
-              final human = _treeEngine.getNodeById(172);
-              if (human != null) _onNodeSelected(human);
-            }
-          },
-          itemBuilder: (context) => [
-            _menuItem('expand_all', Icons.unfold_more, 'Buka Semua Cabang',
-                const Color(0xFF10B981)),
-            _menuItem('collapse_all', Icons.unfold_less, 'Ringkas ke Domain',
-                const Color(0xFFFBBF24)),
-            _menuItem('focus_human', Icons.person_outline,
-                'Fokus ke Homo sapiens', const Color(0xFF38BDF8)),
-          ],
         ),
         const SizedBox(width: 6),
       ],
@@ -326,17 +306,78 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
     );
   }
 
-  PopupMenuItem<String> _menuItem(
-      String val, IconData icon, String label, Color color) {
-    return PopupMenuItem(
-      value: val,
-      child: Row(
-        children: [
-          Icon(icon, size: 16, color: color),
-          const SizedBox(width: 10),
-          Text(label,
-              style: GoogleFonts.inter(color: Colors.white, fontSize: 13)),
-        ],
+  /// Baris pintas memilih taksa ikonik untuk langsung mengubah pohon Metazooa
+  Widget _buildQuickTaxonBar() {
+    final showcaseIds = [
+      {'id': 172, 'name': 'Human', 'latin': 'Homo sapiens', 'color': const Color(0xFF10B981)},
+      {'id': 241, 'name': 'T-Rex †', 'latin': 'Tyrannosaurus rex', 'color': const Color(0xFFEF4444)},
+      {'id': 191, 'name': 'Lion', 'latin': 'Panthera leo', 'color': const Color(0xFFFBBF24)},
+      {'id': 201, 'name': 'Wolf', 'latin': 'Canis lupus', 'color': const Color(0xFF38BDF8)},
+      {'id': 251, 'name': 'Raven', 'latin': 'Corvus corax', 'color': const Color(0xFFA78BFA)},
+      {'id': 221, 'name': 'Blue Whale', 'latin': 'Balaenoptera musculus', 'color': const Color(0xFF67E8F9)},
+      {'id': 261, 'name': 'Great White', 'latin': 'Carcharodon carcharias', 'color': const Color(0xFF34D399)},
+      {'id': 291, 'name': 'Octopus', 'latin': 'Octopus vulgaris', 'color': const Color(0xFFF472B6)},
+    ];
+
+    return Container(
+      height: 38,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: const BoxDecoration(
+        color: Color(0xFF0A0F1E),
+        border: Border(bottom: BorderSide(color: Color(0xFF1E293B), width: 0.8)),
+      ),
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: showcaseIds.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        itemBuilder: (context, index) {
+          final item = showcaseIds[index];
+          final id = item['id'] as int;
+          final isSelected = _selectedNode?.id == id;
+          final color = item['color'] as Color;
+
+          return Center(
+            child: InkWell(
+              onTap: () {
+                final target = _treeEngine.getNodeById(id);
+                if (target != null) _onNodeSelected(target);
+              },
+              borderRadius: BorderRadius.circular(16),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: isSelected ? color.withOpacity(0.2) : const Color(0xFF1E293B),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: isSelected ? color : const Color(0xFF334155),
+                    width: isSelected ? 1.4 : 1.0,
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 6,
+                      height: 6,
+                      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      item['name'] as String,
+                      style: GoogleFonts.inter(
+                        fontSize: 11,
+                        fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                        color: isSelected ? Colors.white : const Color(0xFF94A3B8),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -345,22 +386,32 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
   // TAMPILAN MOBILE / TABLET (<960px)
   // ─────────────────────────────────────────────────────
   Widget _buildNarrowLayout() {
-    return _viewMode == ExplorerViewMode.tree
-        ? CleanTreeView(
-            rootNode: _treeEngine.root,
-            selectedNode: _selectedNode,
-            highlightedNodeIds: _highlightedNodeIds,
-            onNodeSelected: _onNodeSelected,
-            onToggleExpand: _onToggleExpand,
-          )
-        : (_selectedNode != null
+    switch (_viewMode) {
+      case ExplorerViewMode.metazooa:
+        return _selectedNode != null
+            ? MetazooaTreeView(
+                focusNode: _selectedNode!,
+                onNodeSelected: _onNodeSelected,
+                onResetView: () {},
+              )
+            : const Center(child: Text('Pilih takson untuk memulai.'));
+      case ExplorerViewMode.tree:
+        return CleanTreeView(
+          rootNode: _treeEngine.root,
+          selectedNode: _selectedNode,
+          highlightedNodeIds: _highlightedNodeIds,
+          onNodeSelected: _onNodeSelected,
+          onToggleExpand: _onToggleExpand,
+        );
+      case ExplorerViewMode.deck:
+        return _selectedNode != null
             ? CladeDeckView(
                 node: _selectedNode!,
                 onNodeSelected: _onNodeSelected,
                 onOpenLCA: () => _openLCADialog(_selectedNode),
               )
-            : const Center(
-                child: Text('Pilih takson untuk memulai katalog.')));
+            : const Center(child: Text('Pilih takson untuk memulai katalog.'));
+    }
   }
 
   // ─────────────────────────────────────────────────────
@@ -369,25 +420,32 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
   Widget _buildWideLayout() {
     return Row(
       children: [
-        // Kolom Kiri: Pohon Silsilah / Katalog Utama
+        // Kolom Kiri: Pohon Metazooa / Tampilan Utama
         Expanded(
           flex: 6,
-          child: _viewMode == ExplorerViewMode.tree
-              ? CleanTreeView(
-                  rootNode: _treeEngine.root,
-                  selectedNode: _selectedNode,
-                  highlightedNodeIds: _highlightedNodeIds,
-                  onNodeSelected: _onNodeSelected,
-                  onToggleExpand: _onToggleExpand,
-                )
-              : (_selectedNode != null
-                  ? CladeDeckView(
-                      node: _selectedNode!,
+          child: _viewMode == ExplorerViewMode.metazooa
+              ? (_selectedNode != null
+                  ? MetazooaTreeView(
+                      focusNode: _selectedNode!,
                       onNodeSelected: _onNodeSelected,
-                      onOpenLCA: () => _openLCADialog(_selectedNode),
+                      onResetView: () {},
                     )
-                  : const Center(
-                      child: Text('Pilih takson untuk memulai katalog.'))),
+                  : const Center(child: Text('Pilih takson untuk memulai.')))
+              : (_viewMode == ExplorerViewMode.tree
+                  ? CleanTreeView(
+                      rootNode: _treeEngine.root,
+                      selectedNode: _selectedNode,
+                      highlightedNodeIds: _highlightedNodeIds,
+                      onNodeSelected: _onNodeSelected,
+                      onToggleExpand: _onToggleExpand,
+                    )
+                  : (_selectedNode != null
+                      ? CladeDeckView(
+                          node: _selectedNode!,
+                          onNodeSelected: _onNodeSelected,
+                          onOpenLCA: () => _openLCADialog(_selectedNode),
+                        )
+                      : const Center(child: Text('Pilih takson untuk memulai.')))),
         ),
 
         // Garis Pembatas
@@ -427,7 +485,7 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Pilih Takson dari Pohon',
+            'Pilih Node pada Pohon',
             style: GoogleFonts.inter(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -436,7 +494,7 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
           ),
           const SizedBox(height: 6),
           Text(
-            'Klik cabang pada pohon silsilah untuk\nmemeriksa garis keturunan dan faktanya.',
+            'Klik kapsul mana saja untuk melihat silsilah,\nfakta ilmiah, dan taksa kerabatnya.',
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: 12.5,
@@ -460,11 +518,9 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: const Color(0xFF10B981).withOpacity(0.1),
-                border: Border.all(
-                    color: const Color(0xFF10B981).withOpacity(0.4)),
+                border: Border.all(color: const Color(0xFF10B981).withOpacity(0.4)),
               ),
-              child: const Icon(Icons.account_tree_rounded,
-                  size: 44, color: Color(0xFF10B981)),
+              child: const Icon(Icons.account_tree_rounded, size: 44, color: Color(0xFF10B981)),
             ),
             const SizedBox(height: 24),
             Text(
@@ -479,8 +535,7 @@ class _CodexExplorerScreenState extends State<CodexExplorerScreen> {
             const SizedBox(height: 8),
             Text(
               _loadingMessage,
-              style: GoogleFonts.inter(
-                  color: const Color(0xFF64748B), fontSize: 12),
+              style: GoogleFonts.inter(color: const Color(0xFF64748B), fontSize: 12),
             ),
             const SizedBox(height: 24),
             const SizedBox(
@@ -527,9 +582,7 @@ class _ModeButton extends StatelessWidget {
             Icon(
               icon,
               size: 14,
-              color: isActive
-                  ? const Color(0xFF022C22)
-                  : const Color(0xFF94A3B8),
+              color: isActive ? const Color(0xFF022C22) : const Color(0xFF94A3B8),
             ),
             const SizedBox(width: 5),
             Text(
@@ -537,9 +590,7 @@ class _ModeButton extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 11.5,
                 fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
-                color: isActive
-                    ? const Color(0xFF022C22)
-                    : const Color(0xFF94A3B8),
+                color: isActive ? const Color(0xFF022C22) : const Color(0xFF94A3B8),
               ),
             ),
           ],

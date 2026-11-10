@@ -437,3 +437,4 @@ class _TreeBranchPainter extends CustomPainter {
       old.branchColor != branchColor ||
       old.isHighlighted != isHighlighted;
 }
+
